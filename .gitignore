@@ -3,3 +3,10 @@
 
 # Project user intermediates
 *.user
+*.stash
+
+# VS intermediates
+.vs/
+x64/
+[Dd]ebug/
+[Rr]elease/

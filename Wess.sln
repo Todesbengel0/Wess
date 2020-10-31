@@ -1,0 +1,44 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1267
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SGFramework", "sgframework\SGFramework\SGFramework.vcxproj", "{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "App", "app\App.vcxproj", "{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2} = {0DE11DCF-1B60-39B4-9830-A458D74E9AD2}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Debug|Win32.Build.0 = Debug|Win32
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Debug|x64.ActiveCfg = Debug|x64
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Debug|x64.Build.0 = Debug|x64
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Release|Win32.ActiveCfg = Release|Win32
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Release|Win32.Build.0 = Release|Win32
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Release|x64.ActiveCfg = Release|x64
+		{0DE11DCF-1B60-39B4-9830-A458D74E9AD2}.Release|x64.Build.0 = Release|x64
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Debug|Win32.Build.0 = Debug|Win32
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Debug|x64.ActiveCfg = Debug|x64
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Debug|x64.Build.0 = Debug|x64
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Release|Win32.ActiveCfg = Release|Win32
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Release|Win32.Build.0 = Release|Win32
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Release|x64.ActiveCfg = Release|x64
+		{D7FCCFEC-071E-3F74-8FB4-C30AAE812157}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = Qt 5.14.2 MSVC2017 32bit
+		SolutionGuid = {6B92A33C-8BB8-487A-B496-718C573597E8}
+	EndGlobalSection
+EndGlobal
