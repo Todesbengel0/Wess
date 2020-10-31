@@ -1,0 +1,5 @@
+# Root level gitignore
+# only ignore abolutely necessary files on this level
+
+# Project user intermediates
+*.user

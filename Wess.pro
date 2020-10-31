@@ -1,8 +1,8 @@
 TEMPLATE = subdirs
 
-U2.file = Uebungen/Uebung02/SonnensystemVorlage/Sonnensystem.pro
-U2.depends = SGFramework
+U2.file = app/App.pro
+U2.depends = sgframework/SGFramework
 
 SUBDIRS = \
-     SGFramework \
+     sgframework/SGFramework \
     U2 \

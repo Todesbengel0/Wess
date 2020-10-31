@@ -6,6 +6,7 @@
 #include "keyboardtransformation.h"
 #include "mousekeyboardcameracontroller.h"
 #include "color.h"
+#include "simplecube.h"
 
 #include "ui_dockwidget.h"
 
@@ -42,5 +43,9 @@ Node* InitScene()
     auto root = new KeyboardTransformation();
     auto nroot = new Node(root);
 
+    auto test_cube = new Drawable(new SimpleCube(2.0f, 2.0f, 2.0f));
+    test_cube->getProperty<Color>()->setValue(0.5f, 1.0f, 0.5f);
+
+    nroot->addChild(new Node(test_cube));
     return nroot;
 }
