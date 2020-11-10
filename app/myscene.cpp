@@ -1,12 +1,14 @@
-#include "opengl.h"
-#include "openglwidget.h"
-#include "screenrenderer.h"
-#include "scenemanager.h"
-#include "transformation.h"
-#include "keyboardtransformation.h"
-#include "mousekeyboardcameracontroller.h"
-#include "color.h"
-#include "simplecube.h"
+#include <opengl.h>
+#include <openglwidget.h>
+#include <screenrenderer.h>
+#include <scenemanager.h>
+#include <transformation.h>
+#include <keyboardtransformation.h>
+#include <mousekeyboardcameracontroller.h>
+#include <color.h>
+#include <simplecube.h>
+
+#include <QDir>
 
 #include "ui_dockwidget.h"
 
@@ -14,23 +16,23 @@ Node *InitScene();
 
 void SceneManager::initScenes()
 {
-    Ui_FPSWidget *lDock;
-    QDockWidget *lDockWidget = new QDockWidget(QString("FPS"), SceneManager::getMainWindow());
+    auto lDockWidget = new QDockWidget(QString("FPS"), SceneManager::getMainWindow());
 
-    Camera* cam = new Camera();
-    CameraController* camController = new MouseKeyboardCameraController(cam);
+    auto cam = new Camera();
+    auto camController = new MouseKeyboardCameraController(cam);
     Q_UNUSED(camController);
-    RenderingContext *myContext=new RenderingContext(cam);
+    auto myContext=new RenderingContext(cam);
     unsigned int myContextNr = SceneManager::instance()->addContext(myContext);
     unsigned int myScene = SceneManager::instance()->addScene(InitScene());
-    ScreenRenderer *myRenderer = new ScreenRenderer(myContextNr, myScene);
+    auto myRenderer = new ScreenRenderer(myContextNr, myScene);
+	Q_UNUSED(myRenderer);
 
     //Vorsicht: Die Szene muss initialisiert sein, bevor das Fenster verändert wird (Fullscreen)
     SceneManager::instance()->setActiveScene(myScene);
     SceneManager::instance()->setActiveContext(myContextNr);
 //    SceneManager::instance()->setFullScreen();
 
-    lDock = new Ui_FPSWidget();
+    auto lDock = new Ui_FPSWidget();
     lDock->setupUi(lDockWidget);
     lDockWidget->resize(200,100);
     SceneManager::getMainWindow()->addDockWidget(Qt::RightDockWidgetArea, lDockWidget);
@@ -42,6 +44,10 @@ Node* InitScene()
 {
     auto root = new KeyboardTransformation();
     auto nroot = new Node(root);
+
+	// for resource location
+	static const QDir cur_dir(SRCDIR);
+	auto model_path = cur_dir.relativeFilePath("../models/...");
 
     auto test_cube = new Drawable(new SimpleCube(2.0f, 2.0f, 2.0f));
     test_cube->getProperty<Color>()->setValue(0.5f, 1.0f, 0.5f);
