@@ -5,10 +5,6 @@
 #include <transformation.h>
 #include <keyboardtransformation.h>
 #include <mousekeyboardcameracontroller.h>
-#include <color.h>
-#include <simplecube.h>
-
-#include <QDir>
 
 #include "ui_dockwidget.h"
 
@@ -40,18 +36,22 @@ void SceneManager::initScenes()
     QObject::connect(OpenGLWidget::getInstance(), SIGNAL(sigFPS(int)), lDock->lcdNumber, SLOT(display(int)));
 }
 
+#include "Game.h"
+
 Node* InitScene()
 {
-    auto root = new KeyboardTransformation();
-    auto nroot = new Node(root);
+	return Game::GetInstance().Init();
 
-	// for resource location
-	static const QDir cur_dir(SRCDIR);
-	auto model_path = cur_dir.relativeFilePath("../models/...");
+ //   auto root = new KeyboardTransformation();
+ //   auto nroot = new Node(root);
 
-    auto test_cube = new Drawable(new SimpleCube(2.0f, 2.0f, 2.0f));
-    test_cube->getProperty<Color>()->setValue(0.5f, 1.0f, 0.5f);
+	//// for resource location
+	//static const QDir cur_dir(SRCDIR);
+	//auto model_path = cur_dir.relativeFilePath("../models/...");
 
-    nroot->addChild(new Node(test_cube));
-    return nroot;
+ //   auto test_cube = new Drawable(new SimpleCube(2.0f, 2.0f, 2.0f));
+ //   test_cube->getProperty<Color>()->setValue(0.5f, 1.0f, 0.5f);
+
+ //   nroot->addChild(new Node(test_cube));
+ //   return nroot;
 }

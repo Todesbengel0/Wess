@@ -310,6 +310,8 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chessboard.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="myscene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +345,10 @@
   <ItemGroup>
     <QtUic Include="dockwidget.ui">
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chessboard.h" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

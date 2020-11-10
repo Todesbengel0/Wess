@@ -8,7 +8,13 @@ include(../sgframework/Common.pri)
 
 TARGET = App
 SOURCES += \
+    Chessboard.cpp \
+    Game.cpp \
     myscene.cpp
 
 FORMS += \
     dockwidget.ui
+
+HEADERS += \
+    Chessboard.h \
+    Game.h
