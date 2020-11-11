@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Chessboard.h"
 
 Chessboard::Chessboard(float size, float height)

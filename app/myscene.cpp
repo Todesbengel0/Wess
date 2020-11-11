@@ -1,8 +1,7 @@
-#include <opengl.h>
+#include "stdafx.h"
 #include <openglwidget.h>
 #include <screenrenderer.h>
 #include <scenemanager.h>
-#include <transformation.h>
 #include <keyboardtransformation.h>
 #include <mousekeyboardcameracontroller.h>
 

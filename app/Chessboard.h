@@ -1,10 +1,5 @@
 #pragma once
 
-#include <node.h>
-#include <transformation.h>
-#include <drawable.h>
-#include <simplecube.h>
-
 //////////////////////////////////////////////////////////////////////////
 // Klasse: Chessboard
 // Beschreibung: Hauptklasse des Schachbretts

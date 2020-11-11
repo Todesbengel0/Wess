@@ -17,4 +17,7 @@ FORMS += \
 
 HEADERS += \
     Chessboard.h \
-    Game.h
+    Game.h \
+    stdafx.h
+
+PRECOMPILED_HEADER = stdafx.h
