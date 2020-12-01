@@ -31,10 +31,9 @@ public:
 
 // scene objects
 private:
-	Transformation* mtRoot;
+	Transformation mtRoot;
 	Node* mnRoot;
 
 	Chessboard* mChessboard;
-	Node* mnChessboard;
 };
 

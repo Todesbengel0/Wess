@@ -2,10 +2,8 @@
 #include "Game.h"
 
 Game::Game()
-	: mtRoot(nullptr)
-	, mnRoot(nullptr)
+	: mnRoot(nullptr)
 	, mChessboard(nullptr)
-	, mnChessboard(nullptr)
 {
 }
 
@@ -14,11 +12,10 @@ Game::~Game()
 	// root node delete,
 	// this destroys scene graph and all nodes!
 	// freeing node memory elsewhere is UB
-	delete mnChessboard;
+	delete mnRoot;
 
+	// free chessboard & related memory
 	delete mChessboard;
-
-	delete mtRoot;
 }
 
 // singleton access, thread safe by c++11 std
@@ -30,13 +27,11 @@ Game& Game::GetInstance()
 
 Node* Game::Init()
 {
-	mtRoot = new Transformation;
-	mnRoot = new Node(mtRoot);
+	mnRoot = new Node(&mtRoot);
 
 	// chessboard
 	mChessboard = new Chessboard(10.0f, 0.5f);
-	mnChessboard = mChessboard->Init();
-	mnRoot->addChild(mnChessboard);
+	mnRoot->addChild(mChessboard->Init());
 
 	return mnRoot;
 }

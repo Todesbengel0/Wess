@@ -21,7 +21,7 @@ private:
 
 // getters / setters
 public:
-	Transformation* GetRootTrafo() const;
+	const Transformation& GetRootTrafo() const;
 
 // members
 private:
@@ -31,16 +31,16 @@ private:
 // scene objects
 private:
 	// root of the chessboard
-	Transformation* mtRoot;
+	Transformation mtRoot;
 
 	// bottom base frame of the board
 	SimpleCube* mgBaseFrame;
 	Drawable* mdBaseFrame;
-	Transformation* mtBaseFrame;
+	Transformation mtBaseFrame;
 
 	// side frame
-	Transformation* mtSideFrameCenter;
+	Transformation mtSideFrameCenter;
 	SimpleCube* mgSideFrame;
 	Drawable* mdSideFrame;
-	Transformation* mtsSideFrame;
+	Transformation mtsSideFrame[4];
 };
