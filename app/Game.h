@@ -10,10 +10,16 @@
 
 class Game
 {
-// ctor / dtor
-public:
+// ctor / dtor singleton
+private:
 	Game();
+public:
+	Game(const Game&) = delete;
+	Game(Game&&) = delete;
 	~Game();
+
+	Game& operator=(const Game&) = delete;
+	Game& operator=(Game&&) = delete;
 
 // access
 public:
