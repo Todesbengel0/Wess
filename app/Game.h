@@ -24,6 +24,9 @@ public:
 // access
 public:
 	static Game& GetInstance();	// singleton
+
+// initialization
+public:
 	Node* Init();
 
 // scene objects

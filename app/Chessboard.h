@@ -13,13 +13,14 @@ public:
 	Chessboard(float size, float height);
 	~Chessboard();
 
-// access
+// initialization
 public:
 	Node* Init();
+private:
+	void MakeSideFrame(Node* nSideFrameCenter, float frame_thickness, float frame_height);
 
 // getters / setters
 public:
-	Node* GetRoot() const;
 	Transformation* GetRootTrafo() const;
 
 // members
@@ -29,11 +30,17 @@ private:
 
 // scene objects
 private:
+	// root of the chessboard
 	Transformation* mtRoot;
-	Node* mnRoot;
 
 	// bottom base frame of the board
 	SimpleCube* mgBaseFrame;
 	Drawable* mdBaseFrame;
-	Node* mnBaseFrame;
+	Transformation* mtBaseFrame;
+
+	// side frame
+	Transformation* mtSideFrameCenter;
+	SimpleCube* mgSideFrame;
+	Drawable* mdSideFrame;
+	Transformation* mtsSideFrame;
 };

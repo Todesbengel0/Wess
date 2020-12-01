@@ -1,5 +1,9 @@
 #pragma once
 
+// common STL headers
+#include <iostream>
+#include <array>
+
 // common OpenGL headers
 #include <opengl.h>
 

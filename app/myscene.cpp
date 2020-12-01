@@ -40,17 +40,4 @@ void SceneManager::initScenes()
 Node* InitScene()
 {
 	return Game::GetInstance().Init();
-
- //   auto root = new KeyboardTransformation();
- //   auto nroot = new Node(root);
-
-	//// for resource location
-	//static const QDir cur_dir(SRCDIR);
-	//auto model_path = cur_dir.relativeFilePath("../models/...");
-
- //   auto test_cube = new Drawable(new SimpleCube(2.0f, 2.0f, 2.0f));
- //   test_cube->getProperty<Color>()->setValue(0.5f, 1.0f, 0.5f);
-
- //   nroot->addChild(new Node(test_cube));
- //   return nroot;
 }

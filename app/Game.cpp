@@ -13,7 +13,7 @@ Game::~Game()
 {
 	// root node delete,
 	// this destroys scene graph and all nodes!
-	// freeing node memory in any component beyond this point is UB
+	// freeing node memory elsewhere is UB
 	delete mnChessboard;
 
 	delete mChessboard;
