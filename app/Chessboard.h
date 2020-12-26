@@ -1,4 +1,5 @@
 #pragma once
+#include "Figure.h"
 
 //////////////////////////////////////////////////////////////////////////
 // Klasse: Chessboard
@@ -43,4 +44,10 @@ private:
 	SimpleCube* mgSideFrame;
 	Drawable* mdSideFrame;
 	Transformation mtsSideFrame[4];
+
+	//
+	//Fields* mFields[8][8];
+
+	// figure position on chessboard
+	Figure* mFigurePosition[8][8];
 };

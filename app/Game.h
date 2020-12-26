@@ -21,9 +21,11 @@ public:
 	Game& operator=(const Game&) = delete;
 	Game& operator=(Game&&) = delete;
 
+
 // access
 public:
 	static Game& GetInstance();	// singleton
+	void gameloop();
 
 // initialization
 public:

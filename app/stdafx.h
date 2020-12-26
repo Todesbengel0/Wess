@@ -12,3 +12,5 @@
 #include <transformation.h>
 #include <drawable.h>
 #include <simplecube.h>
+#include <color.h>
+#include <trianglemesh.h>

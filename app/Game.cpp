@@ -35,3 +35,7 @@ Node* Game::Init()
 
 	return mnRoot;
 }
+
+void Game::gameloop() {
+
+}
