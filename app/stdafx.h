@@ -14,3 +14,4 @@
 #include <simplecube.h>
 #include <color.h>
 #include <trianglemesh.h>
+#include <camera.h>

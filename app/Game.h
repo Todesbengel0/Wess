@@ -29,10 +29,12 @@ public:
 
 // initialization
 public:
-	Node* Init();
+	Node* Init(Camera* cam);
 
 // scene objects
 private:
+	Camera* mCam;
+
 	Transformation mtRoot;
 	Node* mnRoot;
 

@@ -2,6 +2,6 @@
 #include "Figure.h"
 
 
-Figure::Figure(figureColor color) {
+Figure::Figure(ChessColor color) {
 
 }

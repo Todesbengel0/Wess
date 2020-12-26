@@ -1,4 +1,5 @@
 #pragma once
+#include "ChessField.h"
 #include "Figure.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,8 @@ public:
 public:
 	Node* Init();
 private:
-	void MakeSideFrame(Node* nSideFrameCenter, float frame_thickness, float frame_height);
+	void MakeSideFrame(Node* nTopFrameCenter, float frame_thickness, float frame_height);
+	void MakeFields(Node* nTopFrameCenter, float field_size, float frame_height);
 
 // getters / setters
 public:
@@ -40,13 +42,14 @@ private:
 	Transformation mtBaseFrame;
 
 	// side frame
-	Transformation mtSideFrameCenter;
+	Transformation mtTopFrameCenter;
 	SimpleCube* mgSideFrame;
 	Drawable* mdSideFrame;
 	Transformation mtsSideFrame[4];
 
 	//
-	//Fields* mFields[8][8];
+	SimpleCube* mgField;
+	ChessField mFields[8][8];
 
 	// figure position on chessboard
 	Figure* mFigurePosition[8][8];

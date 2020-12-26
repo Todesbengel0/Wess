@@ -7,18 +7,22 @@
 
 #include "ui_dockwidget.h"
 
-Node *InitScene();
+Node *InitScene(Camera* cam);
 
 void SceneManager::initScenes()
 {
     auto lDockWidget = new QDockWidget(QString("FPS"), SceneManager::getMainWindow());
 
     auto cam = new Camera();
-    auto camController = new MouseKeyboardCameraController(cam);
-    Q_UNUSED(camController);
+
+#ifdef _DEBUG
+	auto camController = new MouseKeyboardCameraController(cam);
+	Q_UNUSED(camController);
+#endif // _DEBUG
+
     auto myContext=new RenderingContext(cam);
     unsigned int myContextNr = SceneManager::instance()->addContext(myContext);
-    unsigned int myScene = SceneManager::instance()->addScene(InitScene());
+    unsigned int myScene = SceneManager::instance()->addScene(InitScene(cam));
     auto myRenderer = new ScreenRenderer(myContextNr, myScene);
 	Q_UNUSED(myRenderer);
 
@@ -37,7 +41,7 @@ void SceneManager::initScenes()
 
 #include "Game.h"
 
-Node* InitScene()
+Node* InitScene(Camera* cam)
 {
-	return Game::GetInstance().Init();
+	return Game::GetInstance().Init(cam);
 }

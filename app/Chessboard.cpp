@@ -30,7 +30,7 @@ Node* Chessboard::Init()
 
 	// calculated size ratios (do not change)
 	constexpr float base_frame_height = 1.0 - field_height;
-	constexpr float side_frame_thickness = 1.0f - 8.0f * field_width;
+	constexpr float side_frame_thickness = (1.0f - 8.0f * field_width) / 2.0f;
 
 	// root of the chessboard
 	auto nRoot = new Node(&mtRoot);
@@ -44,15 +44,18 @@ Node* Chessboard::Init()
 	nRoot->addChild(ntBaseFrame);
 
 	// surrounding side frames
-	mtSideFrameCenter.translate(0.0f, mHeight / 2.0f, 0.0f);	// pos relative to base frame
-	auto nSideFrameCenter = new Node(&mtSideFrameCenter);
-	MakeSideFrame(nSideFrameCenter, side_frame_thickness * mSize, field_height * mHeight);
-	ntBaseFrame->addChild(nSideFrameCenter);
+	mtTopFrameCenter.translate(0.0f, mHeight / 2.0f, 0.0f);	// pos relative to base frame
+	auto nTopFrameCenter = new Node(&mtTopFrameCenter);
+	MakeSideFrame(nTopFrameCenter, side_frame_thickness * mSize, field_height * mHeight);
+	ntBaseFrame->addChild(nTopFrameCenter);
 
+	// fields
+	MakeFields(nTopFrameCenter, field_width * mSize, field_height * mHeight);
+	
 	return nRoot;
 }
 
-void Chessboard::MakeSideFrame(Node* nSideFrameCenter, float frame_thickness, float frame_height)
+void Chessboard::MakeSideFrame(Node* nTopFrameCenter, float frame_thickness, float frame_height)
 {
 	// sizes
 	const float frame_width = mSize - frame_thickness;
@@ -72,7 +75,32 @@ void Chessboard::MakeSideFrame(Node* nSideFrameCenter, float frame_thickness, fl
 		// connect to center
 		auto nSideFrame = new Node(&mtsSideFrame[i]);
 		nSideFrame->addChild(new Node(mdSideFrame));
-		nSideFrameCenter->addChild(nSideFrame);
+		nTopFrameCenter->addChild(nSideFrame);
+	}
+}
+
+void Chessboard::MakeFields(Node* nTopFrameCenter, float field_size, float frame_height)
+{
+	// geometry
+	mgField = new SimpleCube(field_size, frame_height, field_size);
+
+	float zPos = -3.5f * field_size;
+
+	for (int z = 0; z < _countof(mFields); ++z)
+	{
+		float xPos = -3.5f * field_size;
+
+		for (int x = 0; x < _countof(mFields[z]); ++x)
+		{
+			ChessColor col = ((x + z) % 2) ? ChessColor::White : ChessColor::Black;
+
+			auto node = mFields[z][x].Init(mgField, col, xPos, zPos);
+			nTopFrameCenter->addChild(node);
+
+			xPos += field_size;
+		}
+
+		zPos += field_size;
 	}
 }
 

@@ -1,21 +1,18 @@
 #pragma once
 
-
-enum FigureColor {
-	white, black
-};
+#include "ChessColor.h"
 
 class Figure
 {
 public: 
-	Figure(FigureColor color);
+	Figure(ChessColor color);
 	~Figure();
 
 	void SetPosition(int x, int y);
 
 private:
 	float mSize;
-	FigureColor mColor;
+	ChessColor mColor;
 
 	Transformation mtPosition;
 	Drawable* mdFigure;

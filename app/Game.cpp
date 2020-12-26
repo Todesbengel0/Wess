@@ -2,7 +2,8 @@
 #include "Game.h"
 
 Game::Game()
-	: mnRoot(nullptr)
+	: mCam(nullptr)
+	, mnRoot(nullptr)
 	, mChessboard(nullptr)
 {
 }
@@ -25,13 +26,18 @@ Game& Game::GetInstance()
 	return game;
 }
 
-Node* Game::Init()
+Node* Game::Init(Camera* cam)
 {
+	mCam = cam;
 	mnRoot = new Node(&mtRoot);
 
 	// chessboard
 	mChessboard = new Chessboard(10.0f, 0.5f);
 	mnRoot->addChild(mChessboard->Init());
+
+	// initial camera position
+	mCam->setPosition(0.0f, 8.0f, 15.0f);
+	mCam->setRotation(0.0f, 25.0f, 0.0f);	// only works with no camera controller attached
 
 	return mnRoot;
 }
