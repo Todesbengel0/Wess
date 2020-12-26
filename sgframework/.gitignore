@@ -39,6 +39,3 @@ debug*
 release*
 *.Debug
 *.Release
-
-#sgframework header files
-SGFrameworkLib*
