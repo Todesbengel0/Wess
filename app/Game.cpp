@@ -36,8 +36,9 @@ Node* Game::Init(Camera* cam)
 	mnRoot->addChild(mChessboard->Init());
 
 	// initial camera position
-	mCam->setPosition(0.0f, 8.0f, 15.0f);
-	mCam->setRotation(0.0f, 25.0f, 0.0f);	// only works with no camera controller attached
+	//mCam->setPosition(-15.0f, 8.0f, -15.0f);
+	//mCam->lookAt(QVector3D(0.0f, 0.0f, 0.0f));
+	//mCam->setRotation(0.0f, 25.0f, 0.0f);	// only works with no camera controller attached
 
 	return mnRoot;
 }

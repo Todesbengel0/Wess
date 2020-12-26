@@ -2,6 +2,7 @@
 
 // common STL headers
 #include <iostream>
+#include <string>
 #include <array>
 
 // common OpenGL headers

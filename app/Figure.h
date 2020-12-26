@@ -5,10 +5,16 @@
 class Figure
 {
 public: 
-	Figure(ChessColor color);
+	Figure();
 	~Figure();
 
-	void SetPosition(int x, int y);
+public:
+	Node* Init(ChessColor color);
+protected:
+	virtual QString GetMeshFilePath() const = 0;
+
+public:
+	void SetPosition(float tx, float tz);
 
 private:
 	float mSize;
@@ -16,6 +22,6 @@ private:
 
 	Transformation mtPosition;
 	Drawable* mdFigure;
-	Geometry* mgMesh;
+	TriangleMesh* mgMesh;
 };
 
