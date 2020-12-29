@@ -9,10 +9,11 @@
 
 
 
-Selection::Selection(float fieldSize, ChessField* chessField):
+Selection::Selection(float fieldSize, Chessboard* chessBoard):
 	mFieldSize(fieldSize),
 	mFigureSelected(false),
-	mCurrentField(chessField)
+	mChessBoard(chessBoard),
+	mCurrentField(nullptr)
 {
 	mPositionX = 0;
 	mPositionZ = 0;
@@ -28,6 +29,8 @@ Node* Selection::Init() {
 	mfQueen = new Queen();
 	mfKing = new King();
 
+	mCurrentField = mChessBoard->GetField(mPositionX, mPositionZ);
+	mCurrentField->SetHighlighted(true); // set shader to highlighted;
 
 	auto nTrans = new Node(&mtPosition);
 	nTrans->addChild(mfPawn->Init(White));
@@ -44,33 +47,63 @@ Selection::~Selection()
 }
 
 ChessField* Selection::setField() {
-	//mCurrentField; // set shader back to normal 
+	mCurrentField->SetHighlighted(false); // set shader back to normal 
 
 	ChessField* field = mChessBoard->GetField(mPositionX, mPositionZ);
-	//field; // set shader to highlighted;
+	field->SetHighlighted(true); // set shader to highlighted;
 	return field;
 }
 
 void Selection::moveUp()
 {
-	mPositionZ -= 1;
-	mCurrentField = setField();
+	if (mPositionZ < 7) {
+		mPositionZ += 1;
+		mCurrentField = setField();
+	}
 }
 
 void Selection::moveDown()
 {
-	mPositionZ += 1;
-	mCurrentField = setField();
+	if (mPositionZ > 0) {
+		mPositionZ -= 1;
+		mCurrentField = setField();
+	}
 }
 
 void Selection::moveLeft()
 {
-	mPositionX -= 1;
-	mCurrentField = setField();
+	if (mPositionX > 0) {
+		mPositionX -= 1;
+		mCurrentField = setField();
+	}
 }
 
 void Selection::moveRight()
 {
-	mPositionX += 1;
-	mCurrentField = setField();
+	if (mPositionX < 7) {
+		mPositionX += 1;
+		mCurrentField = setField();
+	}
+}
+
+void Selection::keyboard(int, int)
+{
+	auto key_in = InputRegistry::getInstance().getKeyboardInput();
+
+	if (key_in->isKeyPressed('j'))
+	{
+		moveLeft();
+	}
+	else if (key_in->isKeyPressed('i'))
+	{
+		moveUp();
+	}
+	else if (key_in->isKeyPressed('k'))
+	{
+		moveDown();
+	}
+	else if (key_in->isKeyPressed('l'))
+	{
+		moveRight();
+	}
 }

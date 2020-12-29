@@ -3,11 +3,11 @@
 #include "Figure.h"
 #include "ChessBoard.h"
 
-class Selection
+class Selection : public Listener
 {
 
 public:
-	Selection(float fieldSize, ChessField* chessField);
+	Selection(float fieldSize, Chessboard* chessBoard);
 	~Selection();
 	Node* Init();
 
@@ -16,6 +16,8 @@ public:
 	void moveLeft();
 	void moveRight();
 
+	void keyboard(int, int) override;
+	
 	ChessField* setField();
 
 private:

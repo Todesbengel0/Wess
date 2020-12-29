@@ -9,6 +9,9 @@
 // Autor: Vinzenz Funk
 //////////////////////////////////////////////////////////////////////////
 
+class Selection;
+
+
 class Chessboard
 {
 // ctor / dtor
@@ -61,6 +64,9 @@ private:
 	// figure position on chessboard
 	Transformation mtFigureRoot;
 	Figure* mFigures[8][8];
+
+	//Selection
+	Selection* mSelection;
 };
 
 

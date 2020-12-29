@@ -16,3 +16,5 @@
 #include <color.h>
 #include <trianglemesh.h>
 #include <camera.h>
+#include <listener.h>
+#include <inputregistry.h>

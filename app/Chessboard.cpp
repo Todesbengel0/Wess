@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Chessboard.h"
+#include "Selection.h"
 
 // figures
 #include "Pawn.h"
@@ -17,6 +18,7 @@ Chessboard::Chessboard(float size, float height)
 	, mgSideFrame(nullptr)
 	, mdSideFrame(nullptr)
 	, mgField(nullptr)
+	, mSelection(nullptr)
 {
 	memset(mFigures, 0, sizeof mFigures);
 }
@@ -85,6 +87,10 @@ Node* Chessboard::Init()
 	auto nFigureRoot = new Node(&mtFigureRoot);
 	nFieldRoot->addChild(nFigureRoot);
 	MakeFigures(nFigureRoot, field_width * mSize);
+
+	//Selection
+	mSelection = new Selection(float(field_width * mSize), this);
+	mSelection->Init();
 	
 	return nRoot;
 }
