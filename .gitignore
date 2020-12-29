@@ -15,3 +15,6 @@ x64/
 *.sln
 *.vcxproj
 *.filters
+
+# Strange folder that's created during VS debugging
+enc_temp_folder/
