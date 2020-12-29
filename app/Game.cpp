@@ -4,6 +4,7 @@
 Game::Game()
 	: mCam(nullptr)
 	, mnRoot(nullptr)
+	, mHelperAxes(nullptr)
 	, mChessboard(nullptr)
 {
 }
@@ -17,6 +18,9 @@ Game::~Game()
 
 	// free chessboard & related memory
 	delete mChessboard;
+
+	// free helper axes
+	delete mHelperAxes;
 }
 
 // singleton access, thread safe by c++11 std
@@ -31,6 +35,12 @@ Node* Game::Init(Camera* cam)
 	mCam = cam;
 	mnRoot = new Node(&mtRoot);
 
+#ifdef _DEBUG
+	mHelperAxes = new HelperAxes;
+	mHelperAxes->GetTrafo()->translate(0.0f, 5.0f, 0.0f);
+	mnRoot->addChild(mHelperAxes->Init());
+#endif // _DEBUG
+
 	// chessboard
 	mChessboard = new Chessboard(10.0f, 0.5f);
 	mnRoot->addChild(mChessboard->Init());
@@ -41,8 +51,4 @@ Node* Game::Init(Camera* cam)
 	//mCam->setRotation(0.0f, 25.0f, 0.0f);	// only works with no camera controller attached
 
 	return mnRoot;
-}
-
-void Game::gameloop() {
-
 }

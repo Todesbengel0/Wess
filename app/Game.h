@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include "Chessboard.h"
+#include "HelperAxes.h"
 
 class Game
 {
@@ -25,7 +26,6 @@ public:
 // access
 public:
 	static Game& GetInstance();	// singleton
-	void gameloop();
 
 // initialization
 public:
@@ -37,6 +37,8 @@ private:
 
 	Transformation mtRoot;
 	Node* mnRoot;
+
+	HelperAxes* mHelperAxes;
 
 	Chessboard* mChessboard;
 };
