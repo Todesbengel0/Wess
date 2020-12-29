@@ -71,7 +71,8 @@ Node* Chessboard::Init()
 
 	// translated origin for fields, so (0,0) is bottom left
 	// making subsequent positioning easier
-	mtFieldRoot.translate(-3.5f * (field_width * mSize), 0.0f, -3.5f * (field_width * mSize));
+	// not that in a right handed system a higher positive Z is closer (inverted)
+	mtFieldRoot.translate(-3.5f * (field_width * mSize), 0.0f, 3.5f * (field_width * mSize));
 	auto nFieldRoot = new Node(&mtFieldRoot);
 	nTopFrameCenter->addChild(nFieldRoot);
 
@@ -118,7 +119,7 @@ void Chessboard::MakeFields(Node* nFigureRoot, float field_size, float frame_hei
 
 	float zPos = 0.0f;
 
-	for (int z = 0; z < _countof(mFields) / 2; ++z)
+	for (int z = 0; z < _countof(mFields); ++z)
 	{
 		float xPos = 0.0f;
 
@@ -133,44 +134,44 @@ void Chessboard::MakeFields(Node* nFigureRoot, float field_size, float frame_hei
 			xPos += field_size;
 		}
 
-		zPos += field_size;
+		zPos -= field_size;
 	}
 }
 
 void Chessboard::MakeFigures(Node* nFigureRoot, float field_size)
 {
 	// pawns
-	//for (int x = 0; x < 4; ++x)
-	//{
-	//	MakeFigure<Pawn>(x, 1, nFigureRoot, ChessColor::White, field_size);
-	//	MakeFigure<Pawn>(x, 6, nFigureRoot, ChessColor::Black, field_size);
-	//}
+	for (int x = 0; x < 8; ++x)
+	{
+		MakeFigure<Pawn>(x, 1, nFigureRoot, ChessColor::White, field_size);
+		MakeFigure<Pawn>(x, 6, nFigureRoot, ChessColor::Black, field_size);
+	}
 
 	// rooks
 	MakeFigure<Rook>(0, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Rook>(7, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Rook>(0, 7, nFigureRoot, ChessColor::Black, field_size);
-	//MakeFigure<Rook>(7, 7, nFigureRoot, ChessColor::Black, field_size);
+	MakeFigure<Rook>(7, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<Rook>(0, 7, nFigureRoot, ChessColor::Black, field_size);
+	MakeFigure<Rook>(7, 7, nFigureRoot, ChessColor::Black, field_size);
 
-	//// knight
-	//MakeFigure<Knight>(1, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Knight>(6, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Knight>(1, 7, nFigureRoot, ChessColor::Black, field_size);
-	//MakeFigure<Knight>(6, 7, nFigureRoot, ChessColor::Black, field_size);
+	// knight
+	MakeFigure<Knight>(1, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<Knight>(6, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<Knight>(1, 7, nFigureRoot, ChessColor::Black, field_size);
+	MakeFigure<Knight>(6, 7, nFigureRoot, ChessColor::Black, field_size);
 
-	//// bishop
-	//MakeFigure<Bishop>(2, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Bishop>(5, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Bishop>(2, 7, nFigureRoot, ChessColor::Black, field_size);
-	//MakeFigure<Bishop>(5, 7, nFigureRoot, ChessColor::Black, field_size);
+	// bishop
+	MakeFigure<Bishop>(2, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<Bishop>(5, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<Bishop>(2, 7, nFigureRoot, ChessColor::Black, field_size);
+	MakeFigure<Bishop>(5, 7, nFigureRoot, ChessColor::Black, field_size);
 
-	//// queen
-	//MakeFigure<Queen>(3, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<Queen>(3, 7, nFigureRoot, ChessColor::Black, field_size);
+	// queen
+	MakeFigure<Queen>(3, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<Queen>(3, 7, nFigureRoot, ChessColor::Black, field_size);
 
-	//// king
-	//MakeFigure<King>(4, 0, nFigureRoot, ChessColor::White, field_size);
-	//MakeFigure<King>(4, 7, nFigureRoot, ChessColor::Black, field_size);
+	// king
+	MakeFigure<King>(4, 0, nFigureRoot, ChessColor::White, field_size);
+	MakeFigure<King>(4, 7, nFigureRoot, ChessColor::Black, field_size);
 }
 
 const Transformation& Chessboard::GetRootTrafo() const
