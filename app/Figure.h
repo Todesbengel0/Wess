@@ -29,7 +29,6 @@ private:
 // scene objects
 private:
 	Transformation mtPosition;
-	Drawable* mdFigure;
 	TriangleMesh* mgMesh;
 
 	static QMap<QString, TriangleMesh*> msgMeshes;

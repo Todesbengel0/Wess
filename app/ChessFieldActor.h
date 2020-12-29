@@ -4,18 +4,27 @@
 
 class ChessFieldActor
 {
+// ctor / dtor
 public:
 	ChessFieldActor();
 	virtual ~ChessFieldActor();
 
+// initialization
 protected:
-	void Init(ChessColor color);
+	void Init(ChessColor color, Geometry* geo);
+
+// access
+public:
+	void SetHighlighted(bool highlighted);
 
 // properties
-protected:
+private:
 	ChessColor mFieldColor;
+	bool mHighlighted;
 
 // scene objects
 protected:
 	Color* mDrawColor;
+
+	Drawable* mDraw;
 };

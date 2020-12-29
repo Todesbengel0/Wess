@@ -54,7 +54,7 @@ private:
 
 	Transformation mtFieldRoot;
 
-	//
+	// fields
 	SimpleCube* mgField;
 	ChessField mFields[8][8];
 

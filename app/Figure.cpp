@@ -3,26 +3,22 @@
 
 
 Figure::Figure()
-	: mdFigure(nullptr)
-	, mgMesh(nullptr)
+	: mgMesh(nullptr)
 {
 }
 
 Figure::~Figure()
 {
-	delete mdFigure;
 }
 
 Node* Figure::Init(ChessColor color)
 {
-	ChessFieldActor::Init(color);
-
 	mgMesh = GetLoadMesh(GetMeshFilePath());
-	mdFigure = new Drawable(mgMesh);
-	mdFigure->setProperty<Color>(mDrawColor);
+
+	ChessFieldActor::Init(color, mgMesh);
 
 	auto nTrans = new Node(&mtPosition);
-	nTrans->addChild(new Node(mdFigure));
+	nTrans->addChild(new Node(mDraw));
 
 	return nTrans;
 }

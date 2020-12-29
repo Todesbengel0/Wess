@@ -2,22 +2,17 @@
 #include "ChessField.h"
 
 ChessField::ChessField()
-	: mDraw(nullptr)
 {
 }
 
 ChessField::~ChessField()
 {
-	delete mDraw;
 }
 
 Node* ChessField::Init(Geometry* geo, ChessColor color, float tx, float tz)
 {
-	ChessFieldActor::Init(color);
-
 	// all fields share same geometry
-	mDraw = new Drawable(geo);
-	mDraw->setProperty<Color>(mDrawColor);
+	ChessFieldActor::Init(color, geo);
 
 #ifdef _DEBUG
 	// reference field bottom left

@@ -13,5 +13,4 @@ public:
 
 private:
 	Transformation mTrans;
-	Drawable* mDraw;
 };
