@@ -2,6 +2,7 @@
 #include "ChessField.h"
 #include "Figure.h"
 
+
 //////////////////////////////////////////////////////////////////////////
 // Klasse: Chessboard
 // Beschreibung: Hauptklasse des Schachbretts
@@ -28,6 +29,7 @@ private:
 // getters / setters
 public:
 	const Transformation& GetRootTrafo() const;
+	ChessField* GetField(int x, int z);
 
 // members
 private:

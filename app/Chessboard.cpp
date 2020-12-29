@@ -179,3 +179,8 @@ const Transformation& Chessboard::GetRootTrafo() const
 {
 	return mtRoot;
 }
+
+ChessField* Chessboard::GetField(int x, int z)
+{
+	return &mFields[z][x];
+}
