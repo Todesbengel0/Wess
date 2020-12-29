@@ -12,21 +12,43 @@ Figure::Figure()
 Figure::~Figure()
 {
 	delete mdFigure;
-	delete mgMesh;
 }
 
 Node* Figure::Init(ChessColor color)
 {
 	mColor = color;
 
-	// TODO: optimization: figures should share same meshes
-	mgMesh = new TriangleMesh(GetMeshFilePath());
+	mgMesh = GetLoadMesh(GetMeshFilePath());
 	mdFigure = new Drawable(mgMesh);
 
 	auto nTrans = new Node(&mtPosition);
 	nTrans->addChild(new Node(mdFigure));
 
 	return nTrans;
+}
+
+QMap<QString, TriangleMesh*> Figure::msgMeshes;
+
+TriangleMesh* Figure::GetLoadMesh(const QString& file_path)
+{
+	auto it = msgMeshes.find(file_path);
+	if (it == msgMeshes.end())
+	{
+		// load mesh
+		auto mesh = new TriangleMesh(file_path);
+		msgMeshes.insert(file_path, mesh);
+		return mesh;
+	}
+
+	// already loaded mesh
+	return it.value();
+}
+
+void Figure::FreeMeshes()
+{
+	for (auto mesh : msgMeshes)
+		delete mesh;
+	msgMeshes.clear();
 }
 
 void Figure::SetPosition(float tx, float tz)

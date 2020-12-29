@@ -24,6 +24,7 @@ Chessboard::Chessboard(float size, float height)
 Chessboard::~Chessboard()
 {
 	// figures
+	Figure::FreeMeshes();
 	for (auto& line : mFigures)
 		for (auto figure : line)
 			delete figure;

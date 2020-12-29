@@ -10,8 +10,11 @@ public:
 
 public:
 	Node* Init(ChessColor color);
+	static void FreeMeshes();
 protected:
 	virtual QString GetMeshFilePath() const = 0;
+private:
+	static TriangleMesh* GetLoadMesh(const QString& file_path);
 
 public:
 	void SetPosition(float tx, float tz);
@@ -23,5 +26,7 @@ private:
 	Transformation mtPosition;
 	Drawable* mdFigure;
 	TriangleMesh* mgMesh;
+
+	static QMap<QString, TriangleMesh*> msgMeshes;
 };
 
