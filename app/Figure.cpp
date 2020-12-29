@@ -3,8 +3,7 @@
 
 
 Figure::Figure()
-	: mColor(ChessColor::Black)
-	, mdFigure(nullptr)
+	: mdFigure(nullptr)
 	, mgMesh(nullptr)
 {
 }
@@ -16,10 +15,11 @@ Figure::~Figure()
 
 Node* Figure::Init(ChessColor color)
 {
-	mColor = color;
+	ChessFieldActor::Init(color);
 
 	mgMesh = GetLoadMesh(GetMeshFilePath());
 	mdFigure = new Drawable(mgMesh);
+	mdFigure->setProperty<Color>(mDrawColor);
 
 	auto nTrans = new Node(&mtPosition);
 	nTrans->addChild(new Node(mdFigure));

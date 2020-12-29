@@ -3,7 +3,6 @@
 
 ChessField::ChessField()
 	: mDraw(nullptr)
-	, mColor(ChessColor::Black)
 {
 }
 
@@ -14,23 +13,11 @@ ChessField::~ChessField()
 
 Node* ChessField::Init(Geometry* geo, ChessColor color, float tx, float tz)
 {
-	mColor = color;
+	ChessFieldActor::Init(color);
 
 	// all fields share same geometry
 	mDraw = new Drawable(geo);
-
-	switch (color)
-	{
-		case White:
-			mDraw->getProperty<Color>()->setValue(1.0f, 1.0f, 1.0f);
-			break;
-		case Black:
-			mDraw->getProperty<Color>()->setValue(0.0f, 0.0f, 0.0f);
-			break;
-		default:
-			assert(false);
-			break;
-	}
+	mDraw->setProperty<Color>(mDrawColor);
 
 #ifdef _DEBUG
 	// reference field bottom left

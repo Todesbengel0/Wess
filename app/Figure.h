@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ChessColor.h"
+#include "ChessFieldActor.h"
 
-class Figure
+class Figure : public ChessFieldActor
 {
 // ctor / dtor
 public: 
@@ -25,7 +25,6 @@ public:
 // properties
 private:
 	float mSize;
-	ChessColor mColor;
 
 // scene objects
 private:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ChessColor.h"
+#include "ChessFieldActor.h"
 
-class ChessField
+class ChessField : public ChessFieldActor
 {
 public:
 	ChessField();
@@ -14,6 +14,4 @@ public:
 private:
 	Transformation mTrans;
 	Drawable* mDraw;
-
-	ChessColor mColor;
 };
