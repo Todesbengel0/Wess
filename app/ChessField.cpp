@@ -34,7 +34,7 @@ Node* ChessField::Init(Geometry* geo, ChessColor color, float tx, float tz)
 
 #ifdef _DEBUG
 	// reference field bottom left
-	if (tx < -3.0f && tz < -3.0f)
+	if (tx < 0.1f && tz > -0.1f)
 		mDraw->getProperty<Color>()->setValue(1.0f, 0.0f, 0.0f);
 #endif // _DEBUG
 
