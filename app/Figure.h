@@ -21,6 +21,7 @@ private:
 // getters / setters
 public:
 	void SetPosition(float tx, float tz);
+	void step(float x, float z);
 
 // properties
 private:

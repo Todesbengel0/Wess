@@ -52,3 +52,8 @@ void Figure::SetPosition(float tx, float tz)
 	mtPosition.resetTrafo();
 	mtPosition.translate(tx, 0.0f, tz);
 }
+
+void Figure::step(float tx, float tz)
+{
+	mtPosition.translate(tx, 0.0f, tz);
+}

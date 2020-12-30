@@ -23,18 +23,19 @@ Selection::Selection(float fieldSize, Chessboard* chessBoard):
 }
 
 Node* Selection::Init() {
+	float y = 25.0f;
 	mfPawn = new Pawn();
-	mfPawn->SetPosition(-2.5, 15);
+	mfPawn->SetPosition(-2.5, y);
 	mfRook = new Rook();
-	mfRook->SetPosition(-1.5, 15);
+	mfRook->SetPosition(-1.5, y);
 	mfKnight = new Knight();
-	mfKnight->SetPosition(-0.5f, 15);
+	mfKnight->SetPosition(-0.5f, y);
 	mfBishop = new Bishop();
-	mfBishop->SetPosition(0.5f, 15);
+	mfBishop->SetPosition(0.5f, y);
 	mfQueen = new Queen();
-	mfQueen->SetPosition(1.5, 15);
+	mfQueen->SetPosition(1.5, y);
 	mfKing = new King();
-	mfKing->SetPosition(2.5, 15);
+	mfKing->SetPosition(2.5, y);
 
 	mCurrentField = mChessBoard->GetField(mPositionX, mPositionZ);
 	mCurrentField->SetHighlighted(true); // set shader to highlighted;
@@ -66,6 +67,14 @@ void Selection::moveUp()
 	if (mPositionZ < 7) {
 		mPositionZ += 1;
 		mCurrentField = setField();
+
+
+		mfPawn->step(0, -mFieldSize);
+		mfRook->step(0, -mFieldSize);
+		mfKnight->step(0, -mFieldSize);
+		mfBishop->step(0, -mFieldSize);
+		mfQueen->step(0, -mFieldSize);
+		mfKing->step(0, -mFieldSize);
 	}
 }
 
@@ -74,6 +83,14 @@ void Selection::moveDown()
 	if (mPositionZ > 0) {
 		mPositionZ -= 1;
 		mCurrentField = setField();
+
+
+		mfPawn->step(0, mFieldSize);
+		mfRook->step(0, mFieldSize);
+		mfKnight->step(0, mFieldSize);
+		mfBishop->step(0, mFieldSize);
+		mfQueen->step(0, mFieldSize);
+		mfKing->step(0, mFieldSize);
 	}
 }
 
@@ -82,6 +99,14 @@ void Selection::moveLeft()
 	if (mPositionX > 0) {
 		mPositionX -= 1;
 		mCurrentField = setField();
+
+
+		mfPawn->step(-mFieldSize, 0);
+		mfRook->step(-mFieldSize, 0);
+		mfKnight->step(-mFieldSize, 0);
+		mfBishop->step(-mFieldSize, 0);
+		mfQueen->step(-mFieldSize, 0);
+		mfKing->step(-mFieldSize, 0);
 	}
 }
 
@@ -90,6 +115,14 @@ void Selection::moveRight()
 	if (mPositionX < 7) {
 		mPositionX += 1;
 		mCurrentField = setField();
+
+
+		mfPawn->step(mFieldSize, 0);
+		mfRook->step(mFieldSize, 0);
+		mfKnight->step(mFieldSize, 0);
+		mfBishop->step(mFieldSize, 0);
+		mfQueen->step(mFieldSize, 0);
+		mfKing->step(mFieldSize, 0);
 	}
 }
 
