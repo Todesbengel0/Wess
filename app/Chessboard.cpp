@@ -198,3 +198,16 @@ Figure* Chessboard::GetFigure(int x, int z)
 	}
 	else return nullptr;
 }
+
+void Chessboard::SetFigureOnField(int x, int z, int tox, int toz)
+{
+	if (mFigures[toz][tox] == nullptr) {
+		mFigures[toz][tox] = mFigures[z][x];
+		mFigures[z][x] == nullptr;
+	}
+	else {
+		mFigures[toz][tox]->SetPosition(-15, 0);
+		mFigures[toz][tox] = mFigures[z][x];
+		mFigures[z][x] == nullptr;
+	}
+}

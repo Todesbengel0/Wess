@@ -142,12 +142,20 @@ void Selection::selectFigure()
 {
 	if (mSelectedFigure != nullptr) {
 		mSelectedFigure->SetHighlighted(false);
+		mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ);
+
+		mSelectedFigure = nullptr;
+
 	}
+	else {
+		mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
 
-	mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
+		if (mSelectedFigure != nullptr) {
+			mSelectedFigure->SetHighlighted(true);
 
-	if (mSelectedFigure != nullptr) {
-		mSelectedFigure->SetHighlighted(true);
+			mSelectionX = mPositionX;
+			mSelectionZ = mPositionZ;
+		}
 	}
 }
 

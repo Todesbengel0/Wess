@@ -26,6 +26,8 @@ private:
 	int mPositionX;
 	int mPositionZ;
 	bool mFigureSelected;
+	int mSelectionX;
+	int mSelectionZ;
 
 	Transformation mtPosition;
 

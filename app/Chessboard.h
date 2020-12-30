@@ -34,6 +34,7 @@ public:
 	const Transformation& GetRootTrafo() const;
 	ChessField* GetField(int x, int z); 
 	Figure* GetFigure(int x, int z);
+	void SetFigureOnField(int x, int z, int tox, int toz);
 
 // members
 private:
