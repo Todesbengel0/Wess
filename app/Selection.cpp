@@ -68,6 +68,9 @@ void Selection::moveUp()
 		mPositionZ += 1;
 		mCurrentField = setField();
 
+		if (mSelectedFigure != nullptr) {
+			mSelectedFigure->step(0, -mFieldSize);
+		}
 
 		mfPawn->step(0, -mFieldSize);
 		mfRook->step(0, -mFieldSize);
@@ -84,6 +87,9 @@ void Selection::moveDown()
 		mPositionZ -= 1;
 		mCurrentField = setField();
 
+		if (mSelectedFigure != nullptr) {
+			mSelectedFigure->step(0, mFieldSize);
+		}
 
 		mfPawn->step(0, mFieldSize);
 		mfRook->step(0, mFieldSize);
@@ -100,6 +106,9 @@ void Selection::moveLeft()
 		mPositionX -= 1;
 		mCurrentField = setField();
 
+		if (mSelectedFigure != nullptr) {
+			mSelectedFigure->step(-mFieldSize, 0);
+		}
 
 		mfPawn->step(-mFieldSize, 0);
 		mfRook->step(-mFieldSize, 0);
@@ -116,6 +125,9 @@ void Selection::moveRight()
 		mPositionX += 1;
 		mCurrentField = setField();
 
+		if (mSelectedFigure != nullptr) {
+			mSelectedFigure->step(mFieldSize, 0);
+		}
 
 		mfPawn->step(mFieldSize, 0);
 		mfRook->step(mFieldSize, 0);
