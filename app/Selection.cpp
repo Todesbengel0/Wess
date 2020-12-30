@@ -140,14 +140,14 @@ void Selection::moveRight()
 
 void Selection::selectFigure()
 {
-	if (mSelectedFigure != nullptr) {
+	if (mSelectedFigure != nullptr) { // set chesspiece to new position and deselect it 
 		mSelectedFigure->SetHighlighted(false);
 		mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ);
 
 		mSelectedFigure = nullptr;
 
 	}
-	else {
+	else {  // select chesspiece
 		mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
 
 		if (mSelectedFigure != nullptr) {
