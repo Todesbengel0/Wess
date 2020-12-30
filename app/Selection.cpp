@@ -13,7 +13,8 @@ Selection::Selection(float fieldSize, Chessboard* chessBoard):
 	mFieldSize(fieldSize),
 	mFigureSelected(false),
 	mChessBoard(chessBoard),
-	mCurrentField(nullptr)
+	mCurrentField(nullptr),
+	mSelectedFigure(nullptr)	
 {
 	mPositionX = 0;
 	mPositionZ = 0;
@@ -23,11 +24,17 @@ Selection::Selection(float fieldSize, Chessboard* chessBoard):
 
 Node* Selection::Init() {
 	mfPawn = new Pawn();
+	mfPawn->SetPosition(-2.5, 15);
 	mfRook = new Rook();
+	mfRook->SetPosition(-1.5, 15);
 	mfKnight = new Knight();
+	mfKnight->SetPosition(-0.5f, 15);
 	mfBishop = new Bishop();
+	mfBishop->SetPosition(0.5f, 15);
 	mfQueen = new Queen();
+	mfQueen->SetPosition(1.5, 15);
 	mfKing = new King();
+	mfKing->SetPosition(2.5, 15);
 
 	mCurrentField = mChessBoard->GetField(mPositionX, mPositionZ);
 	mCurrentField->SetHighlighted(true); // set shader to highlighted;
@@ -86,6 +93,23 @@ void Selection::moveRight()
 	}
 }
 
+void Selection::selectFigure()
+{
+	if (mSelectedFigure != nullptr) {
+		mSelectedFigure->SetHighlighted(false);
+	}
+
+	mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
+
+	if (mSelectedFigure != nullptr) {
+		mSelectedFigure->SetHighlighted(true);
+	}
+}
+
+
+
+
+
 void Selection::keyboard(int, int)
 {
 	auto key_in = InputRegistry::getInstance().getKeyboardInput();
@@ -105,5 +129,9 @@ void Selection::keyboard(int, int)
 	else if (key_in->isKeyPressed('l'))
 	{
 		moveRight();
+	}
+
+	else if (key_in->isKeyPressed('+')) {
+		selectFigure();
 	}
 }

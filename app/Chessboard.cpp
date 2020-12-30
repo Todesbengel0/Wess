@@ -90,7 +90,7 @@ Node* Chessboard::Init()
 
 	//Selection
 	mSelection = new Selection(float(field_width * mSize), this);
-	mSelection->Init();
+	nRoot->addChild(mSelection->Init());
 	
 	return nRoot;
 }
@@ -189,4 +189,12 @@ const Transformation& Chessboard::GetRootTrafo() const
 ChessField* Chessboard::GetField(int x, int z)
 {
 	return &mFields[z][x];
+}
+
+Figure* Chessboard::GetFigure(int x, int z)
+{
+	if (mFigures[z][x] != nullptr) {
+		return mFigures[z][x];
+	}
+	else return nullptr;
 }

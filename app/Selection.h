@@ -15,6 +15,7 @@ public:
 	void moveDown();
 	void moveLeft();
 	void moveRight();
+	void selectFigure();
 
 	void keyboard(int, int) override;
 	
@@ -31,6 +32,7 @@ private:
 	Chessboard* mChessBoard;
 	ChessField* mCurrentField;
 	
+	Figure* mSelectedFigure;
 	Figure* mfPawn;
 	Figure* mfRook;
 	Figure* mfKnight;
