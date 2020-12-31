@@ -10,7 +10,18 @@ TARGET = App
 SOURCES += \
     Chessboard.cpp \
     Game.cpp \
-    myscene.cpp
+    myscene.cpp \
+    Bishop.cpp \
+    ChessField.cpp \
+    ChessFieldActor.cpp \
+    Figure.cpp \
+    HelperAxes.cpp \
+    King.cpp \
+    Knight.cpp \
+    Pawn.cpp \
+    Queen.cpp \
+    Rook.cpp \
+    Selection.cpp
 
 FORMS += \
     dockwidget.ui
@@ -18,6 +29,18 @@ FORMS += \
 HEADERS += \
     Chessboard.h \
     Game.h \
+    Bishop.h \
+    ChessColor.h \
+    ChessField.h \
+    ChessFieldActor.h \
+    Figure.h \
+    HelperAxes.h \
+    King.h \
+    Knight.h \
+    Pawn.h \
+    Queen.h \
+    Rook.h \
+    Selection.h
     stdafx.h
 
 PRECOMPILED_HEADER = stdafx.h
