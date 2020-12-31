@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Graveyard.h"
 #include "Pawn.h"
 #include "Bishop.h"
@@ -11,6 +12,7 @@ Graveyard::Graveyard(float zKoord, float firstPosition, float steps)
       mFirstPosition(firstPosition),
       mSteps(steps)
 {
+	memset(mFigures, 0, sizeof(mFigures));
 }
 
 Graveyard::~Graveyard()
