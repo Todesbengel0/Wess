@@ -41,6 +41,10 @@ Chessboard::~Chessboard()
 	// bottom base frame of the board
 	delete mdBaseFrame;
 	delete mgBaseFrame;
+
+    // graveyards
+    delete mBlackGraveyard;
+    delete mWhiteGraveyard;
 }
 
 Node* Chessboard::Init()
@@ -91,6 +95,12 @@ Node* Chessboard::Init()
 	//Selection
 	mSelection = new Selection(float(field_width * mSize), this);
 	nRoot->addChild(mSelection->Init());
+
+    // Graveyards
+    mWhiteGraveyard = new Graveyard(/*zKoord für Aufreihung der Weißen Figuren auf der SCHWARZEN SEITE!*/ 10.0f, /*Wo soll die Anreihung starten (Bei weißen Figuren hinter dem Feld H8)*/ 8.0f, /*Wie groß ist der Abstand zwischen den einzelnen Feldern? Wichtig: Richtung beachten*/ -1.0f);
+    mBlackGraveyard = new Graveyard(/*zKoord für Aufreihung der Schwarzen Figuren auf der WEIßEN SEITE!*/ -2.0f, /*Wo soll die Anreihung starten (Bei schwarzen Figuren vor dem Feld A1)*/ 0.0f, /*Wie groß ist der Abstand zwischen den einzelnen Feldern? Wichtig: Richtung beachten*/ 1.0f);
+    nRoot->addChild(mWhiteGraveyard->Init());
+    nRoot->addChild(mBlackGraveyard->Init());
 	
 	return nRoot;
 }
@@ -206,7 +216,9 @@ void Chessboard::SetFigureOnField(int x, int z, int tox, int toz)
         mFigures[z][x] = nullptr;
 	}
 	else {
-		mFigures[toz][tox]->SetPosition(-15, 0); // teleports slain piece of the board, can later be replaced by a death funktion
+        //if (mFigures[toz][tox]->GetColor == White)
+            mWhiteGraveyard->AddFigure(mFigures[toz][tox]);
+        //else mBlackGraveyard->AddFigure(mFigures[toz][tox]); // teleports slain piece of the board, can later be replaced by a death funktion
 		mFigures[toz][tox] = mFigures[z][x];
         mFigures[z][x] = nullptr;
 	}

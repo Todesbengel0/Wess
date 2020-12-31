@@ -10,6 +10,7 @@ TARGET = App
 SOURCES += \
     Chessboard.cpp \
     Game.cpp \
+    Graveyard.cpp \
     myscene.cpp \
     Bishop.cpp \
     ChessField.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     ChessField.h \
     ChessFieldActor.h \
     Figure.h \
+    Graveyard.h \
     HelperAxes.h \
     King.h \
     Knight.h \

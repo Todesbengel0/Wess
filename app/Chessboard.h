@@ -1,6 +1,7 @@
 #pragma once
 #include "ChessField.h"
 #include "Figure.h"
+#include "Graveyard.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -69,6 +70,10 @@ private:
 
 	//Selection
 	Selection* mSelection;
+
+    //Graveyards
+    Graveyard* mWhiteGraveyard;
+    Graveyard* mBlackGraveyard;
 };
 
 
