@@ -13,5 +13,5 @@ Bishop::~Bishop()
 
 QString Bishop::GetMeshFilePath() const
 {
-    return "models/bishop.obj";
+    return ":/models/bishop.obj";
 }

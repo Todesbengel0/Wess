@@ -13,5 +13,5 @@ Pawn::~Pawn()
 
 QString Pawn::GetMeshFilePath() const
 {
-	return "models/pawn.obj";
+    return ":/models/pawn.obj";
 }

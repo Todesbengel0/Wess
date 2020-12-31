@@ -13,5 +13,5 @@ Rook::~Rook()
 
 QString Rook::GetMeshFilePath() const
 {
-	return "models/rook.obj";
+    return ":/models/rook.obj";
 }

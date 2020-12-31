@@ -13,5 +13,5 @@ Knight::~Knight()
 
 QString Knight::GetMeshFilePath() const
 {
-	return "models/knight.obj";
+    return ":/models/knight.obj";
 }

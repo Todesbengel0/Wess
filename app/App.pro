@@ -46,3 +46,6 @@ HEADERS += \
     stdafx.h
 
 PRECOMPILED_HEADER = stdafx.h
+
+RESOURCES += \
+    App.qrc

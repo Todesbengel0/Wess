@@ -13,5 +13,5 @@ Queen::~Queen()
 
 QString Queen::GetMeshFilePath() const
 {
-	return "models/queen.obj";
+    return ":/models/queen.obj";
 }

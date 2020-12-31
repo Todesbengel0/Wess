@@ -13,5 +13,5 @@ King::~King()
 
 QString King::GetMeshFilePath() const
 {
-	return "models/king.obj";
+    return ":/models/king.obj";
 }
