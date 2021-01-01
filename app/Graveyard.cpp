@@ -12,7 +12,7 @@ Graveyard::Graveyard(float zKoord, float firstPosition, float steps)
       mFirstPosition(firstPosition),
       mSteps(steps)
 {
-	memset(mFigures, 0, sizeof(mFigures));
+    memset(mFigures, 0, sizeof(mFigures));
 }
 
 Graveyard::~Graveyard()
@@ -32,29 +32,43 @@ Node* Graveyard::Init()
 
 void Graveyard::AddFigure(Figure* deadFigure)
 {
+    short figureValue = 0;
+    if (dynamic_cast<Pawn*>(deadFigure))
+        figureValue = 0;
+    else if (dynamic_cast<Knight*>(deadFigure))
+        figureValue = 1;
+    else if (dynamic_cast<Bishop*>(deadFigure))
+        figureValue = 2;
+    else if (dynamic_cast<Rook*>(deadFigure))
+        figureValue = 3;
+    else if (dynamic_cast<Queen*>(deadFigure))
+        figureValue = 4;
+    else if (dynamic_cast<King*>(deadFigure))
+        figureValue = 5;
     for (int j = 0; j < 6; ++j)
     {
         if (!mFigures[j][0])
         {
-            short figureValue = 0;
-            if (dynamic_cast<Pawn*>(deadFigure))
-                figureValue = 0;
-            else if (dynamic_cast<Knight*>(deadFigure))
-                figureValue = 1;
-            else if (dynamic_cast<Bishop*>(deadFigure))
-                figureValue = 2;
-            else if (dynamic_cast<Rook*>(deadFigure))
-                figureValue = 3;
-            else if (dynamic_cast<Queen*>(deadFigure))
-                figureValue = 4;
-            else if (dynamic_cast<King*>(deadFigure))
-                figureValue = 5;
-            ShuffleFigures(figureValue, j);
-            mFigures[figureValue][0] = deadFigure;
-            MoveFigure(deadFigure, figureValue, 0);
+            mFigures[j][0] = deadFigure;
+            MoveFigure(deadFigure, j, 0);
             return;
         }
-        if (typeid(mFigures[j][0]) == typeid(deadFigure))
+        short graveyardFValue = 0;
+        if (dynamic_cast<Pawn*>(mFigures[j][0]))
+            graveyardFValue = 0;
+        else if (dynamic_cast<Knight*>(mFigures[j][0]))
+            graveyardFValue = 1;
+        else if (dynamic_cast<Bishop*>(mFigures[j][0]))
+            graveyardFValue = 2;
+        else if (dynamic_cast<Rook*>(mFigures[j][0]))
+            graveyardFValue = 3;
+        else if (dynamic_cast<Queen*>(mFigures[j][0]))
+            graveyardFValue = 4;
+        else if (dynamic_cast<King*>(mFigures[j][0]))
+            graveyardFValue = 5;
+        if (graveyardFValue < figureValue)
+            continue;
+        if (graveyardFValue == figureValue)
            for (int i = 0; i < 8; ++i)
                if (!mFigures[j][i])
                {
@@ -62,6 +76,10 @@ void Graveyard::AddFigure(Figure* deadFigure)
                    MoveFigure(deadFigure, j, i);
                    return;
                }
+        ShuffleFigures(j, 5);
+        mFigures[j][0] = deadFigure;
+        MoveFigure(deadFigure, j, 0);
+        return;
     }
 }
 
@@ -69,7 +87,12 @@ void Graveyard::ShuffleFigures(int startShuffle, int endShuffle)
 {
     for (; endShuffle > startShuffle; --endShuffle)
         for (int i = 0; i < 8; ++i)
+        {
+            if(!mFigures[endShuffle-1][i])
+                break;
             mFigures[endShuffle][i] = mFigures[endShuffle-1][i];
+            MoveFigure(mFigures[endShuffle][i], endShuffle, i);
+        }
     for (int i = 0; i < 8; ++i)
         mFigures[startShuffle][i] = nullptr;
 }
