@@ -13,6 +13,10 @@ public:
 protected:
 	void Init(ChessColor color, Geometry* geo);
 
+// getters / setters
+public:
+	ChessColor GetFieldColor() const;
+
 // access
 public:
 	void SetHighlighted(bool highlighted);

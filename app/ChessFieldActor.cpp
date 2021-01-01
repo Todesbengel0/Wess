@@ -38,6 +38,11 @@ void ChessFieldActor::Init(ChessColor color, Geometry* geo)
 	mDraw->setProperty<Color>(mDrawColor);
 }
 
+ChessColor ChessFieldActor::GetFieldColor() const
+{
+	return mFieldColor;
+}
+
 void ChessFieldActor::SetHighlighted(bool highlighted)
 {
 	if (highlighted == mHighlighted)

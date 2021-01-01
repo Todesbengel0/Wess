@@ -76,5 +76,5 @@ void Graveyard::ShuffleFigures(int startShuffle, int endShuffle)
 
 void Graveyard::MoveFigure(Figure *deadFigure, int xPosition, int zPosition)
 {
-    deadFigure->SetPosition(mFirstPosition + mSteps * xPosition, mZKoord - mSteps * zPosition);
+    deadFigure->SetPosition(mFirstPosition + mSteps * xPosition, mZKoord + mSteps * zPosition);
 }

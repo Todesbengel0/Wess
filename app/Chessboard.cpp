@@ -52,6 +52,7 @@ Node* Chessboard::Init()
 	// size ratios
 	constexpr float field_height = 0.8f;
 	constexpr float field_width = 0.11f;
+	constexpr float graveyard_field_dist = 3.0f; // in #fields
 
 	// calculated size ratios (do not change)
 	constexpr float base_frame_height = 1.0 - field_height;
@@ -79,26 +80,28 @@ Node* Chessboard::Init()
 	// translated origin for fields, so (0,0) is bottom left
 	// making subsequent positioning easier
 	// not that in a right handed system a higher positive Z is closer (inverted)
-	mtFieldRoot.translate(-3.5f * (field_width * mSize), 0.0f, 3.5f * (field_width * mSize));
+	float field_size = field_width * mSize;
+	mtFieldRoot.translate(-3.5f * field_size, 0.0f, 3.5f * field_size);
 	auto nFieldRoot = new Node(&mtFieldRoot);
 	nTopFrameCenter->addChild(nFieldRoot);
 
 	// fields
-	MakeFields(nFieldRoot, field_width * mSize, field_height * mHeight);
+	MakeFields(nFieldRoot, field_size, field_height * mHeight);
 
 	// figures
 	mtFigureRoot.translate(0.0f, 0.5f * (field_height * mHeight), 0.0f);
 	auto nFigureRoot = new Node(&mtFigureRoot);
 	nFieldRoot->addChild(nFigureRoot);
-	MakeFigures(nFigureRoot, field_width * mSize);
+	MakeFigures(nFigureRoot, field_size);
 
 	//Selection
-	mSelection = new Selection(float(field_width * mSize), this);
+	mSelection = new Selection(field_size, this);
 	nRoot->addChild(mSelection->Init());
 
     // Graveyards
-    mWhiteGraveyard = new Graveyard(/*zKoord für Aufreihung der Weißen Figuren auf der SCHWARZEN SEITE!*/ 10.0f, /*Wo soll die Anreihung starten (Bei weißen Figuren hinter dem Feld H8)*/ 8.0f, /*Wie groß ist der Abstand zwischen den einzelnen Feldern? Wichtig: Richtung beachten*/ -1.0f);
-    mBlackGraveyard = new Graveyard(/*zKoord für Aufreihung der Schwarzen Figuren auf der WEIßEN SEITE!*/ -2.0f, /*Wo soll die Anreihung starten (Bei schwarzen Figuren vor dem Feld A1)*/ 0.0f, /*Wie groß ist der Abstand zwischen den einzelnen Feldern? Wichtig: Richtung beachten*/ 1.0f);
+	// positions are relative to A1 at (0,0)
+    mWhiteGraveyard = new Graveyard(-(7.0f + graveyard_field_dist) * field_size, 7.0f * field_size, -field_size);
+    mBlackGraveyard = new Graveyard(graveyard_field_dist * field_size, 0.0f, field_size);
     nRoot->addChild(mWhiteGraveyard->Init());
     nRoot->addChild(mBlackGraveyard->Init());
 	
@@ -216,9 +219,12 @@ void Chessboard::SetFigureOnField(int x, int z, int tox, int toz)
         mFigures[z][x] = nullptr;
 	}
 	else {
-        //if (mFigures[toz][tox]->GetColor == White)
+		// teleports slain piece of the board, can later be replaced by a death funktion
+        if (mFigures[toz][tox]->GetFieldColor() == ChessColor::White)
             mWhiteGraveyard->AddFigure(mFigures[toz][tox]);
-        //else mBlackGraveyard->AddFigure(mFigures[toz][tox]); // teleports slain piece of the board, can later be replaced by a death funktion
+        else if (mFigures[toz][tox]->GetFieldColor() == ChessColor::Black)
+			mBlackGraveyard->AddFigure(mFigures[toz][tox]);
+
 		mFigures[toz][tox] = mFigures[z][x];
         mFigures[z][x] = nullptr;
 	}
