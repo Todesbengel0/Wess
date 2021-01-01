@@ -18,3 +18,7 @@ x64/
 
 # Strange folder that's created during VS debugging
 enc_temp_folder/
+
+# Compiled interface file
+ui_*widget.h
+ui_*widgets.h
