@@ -7,7 +7,7 @@ class Selection : public Listener
 {
 
 public:
-	Selection(float fieldSize, Chessboard* chessBoard);
+	Selection(float fieldSize, ChessBoard* chessBoard);
 	~Selection();
 	Node* Init();
 
@@ -31,7 +31,7 @@ private:
 
 	Transformation mtPosition;
 
-	Chessboard* mChessBoard;
+	ChessBoard* mChessBoard;
 	ChessField* mCurrentField;
 	
 	Figure* mSelectedFigure;

@@ -56,7 +56,7 @@ Node* Game::Init(Camera* cam)
 #endif // _DEBUG
 
 	// chessboard
-	mChessboard = new Chessboard(10.0f, 0.5f);
+	mChessboard = new ChessBoard(10.0f, 0.5f);
 	mnRoot->addChild(mChessboard->Init());
 
 	// initial camera position

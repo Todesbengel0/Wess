@@ -10,7 +10,7 @@
 #include "King.h"
 #include "Queen.h"
 
-Chessboard::Chessboard(float size, float height)
+ChessBoard::ChessBoard(float size, float height)
 	: mSize(size)
 	, mHeight(height)
 	, mgBaseFrame(nullptr)
@@ -23,7 +23,7 @@ Chessboard::Chessboard(float size, float height)
 	memset(mFigures, 0, sizeof mFigures);
 }
 
-Chessboard::~Chessboard()
+ChessBoard::~ChessBoard()
 {
 	// figures
 	Figure::FreeMeshes();
@@ -47,7 +47,7 @@ Chessboard::~Chessboard()
     delete mWhiteGraveyard;
 }
 
-Node* Chessboard::Init()
+Node* ChessBoard::Init()
 {
 	// size ratios
 	constexpr float field_height = 0.8f;
@@ -109,7 +109,7 @@ Node* Chessboard::Init()
 	return nRoot;
 }
 
-void Chessboard::MakeSideFrame(Node* nTopFrameCenter, float frame_thickness, float frame_height)
+void ChessBoard::MakeSideFrame(Node* nTopFrameCenter, float frame_thickness, float frame_height)
 {
 	// sizes
 	const float frame_width = mSize - frame_thickness;
@@ -133,7 +133,7 @@ void Chessboard::MakeSideFrame(Node* nTopFrameCenter, float frame_thickness, flo
 	}
 }
 
-void Chessboard::MakeFields(Node* nFigureRoot, float field_size, float frame_height)
+void ChessBoard::MakeFields(Node* nFigureRoot, float field_size, float frame_height)
 {
 	// geometry
 	mgField = new SimpleCube(field_size, frame_height, field_size);
@@ -159,7 +159,7 @@ void Chessboard::MakeFields(Node* nFigureRoot, float field_size, float frame_hei
 	}
 }
 
-void Chessboard::MakeFigures(Node* nFigureRoot, float field_size)
+void ChessBoard::MakeFigures(Node* nFigureRoot, float field_size)
 {
 	// pawns
 	for (int x = 0; x < 8; ++x)
@@ -195,17 +195,17 @@ void Chessboard::MakeFigures(Node* nFigureRoot, float field_size)
 	MakeFigure<King>(4, 7, nFigureRoot, ChessColor::Black, field_size);
 }
 
-const Transformation& Chessboard::GetRootTrafo() const
+const Transformation& ChessBoard::GetRootTrafo() const
 {
 	return mtRoot;
 }
 
-ChessField* Chessboard::GetField(int x, int z)
+ChessField* ChessBoard::GetField(int x, int z)
 {
 	return &mFields[z][x];
 }
 
-Figure* Chessboard::GetFigure(int x, int z)
+Figure* ChessBoard::GetFigure(int x, int z)
 {
 	if (mFigures[z][x] != nullptr) {
 		return mFigures[z][x];
@@ -213,7 +213,7 @@ Figure* Chessboard::GetFigure(int x, int z)
 	else return nullptr;
 }
 
-void Chessboard::SetFigureOnField(int x, int z, int tox, int toz)
+void ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 {
 	if (mFigures[toz][tox] == nullptr) {
 		mFigures[toz][tox] = mFigures[z][x];

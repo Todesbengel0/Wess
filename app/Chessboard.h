@@ -13,12 +13,12 @@
 class Selection;
 
 
-class Chessboard
+class ChessBoard
 {
 // ctor / dtor
 public:
-	Chessboard(float size, float height);
-	~Chessboard();
+	ChessBoard(float size, float height);
+	~ChessBoard();
 
 // initialization
 public:
@@ -79,7 +79,7 @@ private:
 
 
 template <class Ty>
-Ty* Chessboard::MakeFigure(int x, int z, Node* nFigureRoot, ChessColor color, float field_size)
+Ty* ChessBoard::MakeFigure(int x, int z, Node* nFigureRoot, ChessColor color, float field_size)
 {
 	auto figure = new Ty;
 

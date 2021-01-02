@@ -42,6 +42,6 @@ private:
 
 	HelperAxes* mHelperAxes;
 
-	Chessboard* mChessboard;
+	ChessBoard* mChessboard;
 };
 

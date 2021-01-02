@@ -9,7 +9,7 @@
 
 
 
-Selection::Selection(float fieldSize, Chessboard* chessBoard):
+Selection::Selection(float fieldSize, ChessBoard* chessBoard):
 	mFieldSize(fieldSize),
 	mFigureSelected(false),
 	mChessBoard(chessBoard),

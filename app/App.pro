@@ -8,7 +8,7 @@ include(../sgframework/Common.pri)
 
 TARGET = App
 SOURCES += \
-    Chessboard.cpp \
+    ChessBoard.cpp \
     Game.cpp \
     Graveyard.cpp \
     WoodenPatternMap.cpp \
@@ -31,7 +31,7 @@ FORMS += \
     dockwidget.ui
 
 HEADERS += \
-    Chessboard.h \
+    ChessBoard.h \
     Game.h \
     Bishop.h \
     ChessColor.h \
