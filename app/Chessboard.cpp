@@ -13,6 +13,7 @@
 ChessBoard::ChessBoard(float size, float height)
 	: mSize(size)
 	, mHeight(height)
+    , mfield_size(1)
 	, mgBaseFrame(nullptr)
 	, mdBaseFrame(nullptr)
 	, mgSideFrame(nullptr)
@@ -81,28 +82,28 @@ Node* ChessBoard::Init()
 	// translated origin for fields, so (0,0) is bottom left
 	// making subsequent positioning easier
 	// not that in a right handed system a higher positive Z is closer (inverted)
-	float field_size = field_width * mSize;
-	mtFieldRoot.translate(-3.5f * field_size, 0.0f, 3.5f * field_size);
+    mfield_size = field_width * mSize;
+    mtFieldRoot.translate(-3.5f * mfield_size, 0.0f, 3.5f * mfield_size);
 	auto nFieldRoot = new Node(&mtFieldRoot);
 	nTopFrameCenter->addChild(nFieldRoot);
 
 	// fields
-	MakeFields(nFieldRoot, field_size, field_height * mHeight);
+    MakeFields(nFieldRoot, mfield_size, field_height * mHeight);
 
 	// figures
 	mtFigureRoot.translate(0.0f, 0.5f * (field_height * mHeight), 0.0f);
 	auto nFigureRoot = new Node(&mtFigureRoot);
 	nFieldRoot->addChild(nFigureRoot);
-	MakeFigures(nFigureRoot, field_size);
+    MakeFigures(nFigureRoot, mfield_size);
 
 	//Selection
-	mSelection = new Selection(field_size, this);
+    mSelection = new Selection(mfield_size, this);
 	nRoot->addChild(mSelection->Init());
 
     // Graveyards
 	// positions are relative to A1 at (0,0)
-    mWhiteGraveyard = new Graveyard(-(7.0f + graveyard_field_dist) * field_size, 7.0f * field_size, -field_size);
-    mBlackGraveyard = new Graveyard(graveyard_field_dist * field_size, 0.0f, field_size);
+    mWhiteGraveyard = new Graveyard(-(7.0f + graveyard_field_dist) * mfield_size, 7.0f * mfield_size, -mfield_size);
+    mBlackGraveyard = new Graveyard(graveyard_field_dist * mfield_size, 0.0f, mfield_size);
     nRoot->addChild(mWhiteGraveyard->Init());
     nRoot->addChild(mBlackGraveyard->Init());
 	
@@ -216,7 +217,7 @@ Figure* ChessBoard::GetFigure(int x, int z)
 bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 {
     // check if figure can actually move that way
-    if (!mFigures[z][x]->ValidMovement(x, z, tox, toz))
+    if (!mFigures[z][x]->ValidMovement(x, z, tox, toz, this))
         return false;
 
     // place, if space not occupied already
@@ -241,5 +242,10 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 	mFigures[toz][tox] = mFigures[z][x];
     mFigures[z][x] = nullptr;
 
-	return true;
+    return true;
+}
+
+float ChessBoard::GetFieldSize()
+{
+    return mfield_size;
 }

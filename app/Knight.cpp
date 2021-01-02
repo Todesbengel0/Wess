@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "Knight.h"
+#include "Chessboard.h"
 
 Knight::Knight() = default;
 
 Knight::~Knight() = default;
 
-bool Knight::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition)
+bool Knight::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board)
 {
     if ((abs(xStartPosition-xTargetPosition) == 1 && abs(zStartPosition-zTargetPosition) == 2)
             || (abs(xStartPosition-xTargetPosition) == 2 && abs(zStartPosition-zTargetPosition) == 1))

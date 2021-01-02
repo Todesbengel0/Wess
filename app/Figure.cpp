@@ -83,5 +83,10 @@ int Figure::GetInitialX() const
 
 int Figure::GetInitialZ() const
 {
-	return mInitialZ;
+    return mInitialZ;
+}
+
+void Figure::MovePosition(float tx, float tz)
+{
+    mtPosition.translate(tx, 0.0f, tz);
 }

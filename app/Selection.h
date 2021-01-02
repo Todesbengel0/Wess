@@ -1,7 +1,7 @@
 #pragma once
 #include "ChessField.h"
 #include "Figure.h"
-#include "ChessBoard.h"
+#include "Chessboard.h"
 
 class Selection : public Listener
 {

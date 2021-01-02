@@ -36,11 +36,13 @@ public:
 	ChessField* GetField(int x, int z); 
 	Figure* GetFigure(int x, int z);
 	bool SetFigureOnField(int x, int z, int tox, int toz);
+    float GetFieldSize();
 
 // members
 private:
 	const float mSize;
 	const float mHeight;
+    float mfield_size;
 
 // scene objects
 private:

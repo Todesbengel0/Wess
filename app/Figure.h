@@ -3,6 +3,8 @@
 #include "ChessFieldActor.h"
 #include "WoodenPiece.h"
 
+class ChessBoard;
+
 class Figure : public ChessFieldActor, public WoodenPiece
 {
 // ctor / dtor
@@ -32,7 +34,9 @@ protected:
 // methods
 public:
     //! X-Position sind Felder A-H, Z-Position sind Felder 1-8
-    virtual bool ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition) = 0;
+    virtual bool ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board) = 0;
+    //! Move Figure in absolute Coordinates (handle with Caution!)
+    void MovePosition(float tx, float tz);
 
 // properties
 private:
