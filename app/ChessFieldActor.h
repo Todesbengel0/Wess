@@ -30,7 +30,5 @@ private:
 
 // scene objects
 protected:
-	Color* mDrawColor;
-
 	Drawable* mDraw;
 };

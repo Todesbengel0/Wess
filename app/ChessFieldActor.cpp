@@ -6,14 +6,12 @@
 ChessFieldActor::ChessFieldActor()
 	: mFieldColor(ChessColor::Black)
 	, mHighlighted(false)
-	, mDrawColor(nullptr)
 	, mDraw(nullptr)
 {
 }
 
 ChessFieldActor::~ChessFieldActor()
 {
-	delete mDrawColor;
 	delete mDraw;
 }
 
@@ -21,10 +19,6 @@ void ChessFieldActor::Init(ChessColor color, Geometry* geo)
 {
 	mFieldColor = color;
 	mDraw = new Drawable(geo);
-
-	const QVector3D draw_col = GetDrawColor();
-	mDrawColor = new Color(draw_col.x(), draw_col.y(), draw_col.z());
-	mDraw->setProperty<Color>(mDrawColor);
 
 	mDraw->getProperty<ActorHighlight>()->SetHighlightColor(QVector3D(0.8f, 0.0f, 0.0f));
 }
