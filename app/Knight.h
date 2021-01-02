@@ -8,6 +8,8 @@ public:
 	Knight();
 	~Knight();
 
+    bool ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition) override;
+
 protected:
 	QString GetMeshFilePath() const override;
 	void OnInit() override;

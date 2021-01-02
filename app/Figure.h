@@ -29,6 +29,11 @@ protected:
 	int GetInitialX() const;
 	int GetInitialZ() const;
 
+// methods
+public:
+    //! X-Position sind Felder A-H, Z-Position sind Felder 1-8
+    virtual bool ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition) = 0;
+
 // properties
 private:
 	float mSize;

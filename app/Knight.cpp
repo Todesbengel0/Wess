@@ -5,6 +5,14 @@ Knight::Knight() = default;
 
 Knight::~Knight() = default;
 
+bool Knight::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition)
+{
+    if ((abs(xStartPosition-xTargetPosition) == 1 && abs(zStartPosition-zTargetPosition) == 2)
+            || (abs(xStartPosition-xTargetPosition) == 2 && abs(zStartPosition-zTargetPosition) == 1))
+        return true;
+    return false;
+}
+
 QString Knight::GetMeshFilePath() const
 {
     return ":/models/knight.obj";

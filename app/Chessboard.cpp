@@ -215,8 +215,12 @@ Figure* ChessBoard::GetFigure(int x, int z)
 
 bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 {
-	// place, if space not occupied already
-	if (mFigures[toz][tox] == nullptr)
+    // check if figure can actually move that way
+    if (!mFigures[z][x]->ValidMovement(x, z, tox, toz))
+        return false;
+
+    // place, if space not occupied already
+    if (mFigures[toz][tox] == nullptr)
 	{
 		mFigures[toz][tox] = mFigures[z][x];
         mFigures[z][x] = nullptr;
