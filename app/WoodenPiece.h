@@ -2,6 +2,7 @@
 
 class WoodenShader;
 class WoodenPatternMap;
+class WoodenBumpMap;
 class WoodenPiece
 {
 public:
@@ -19,4 +20,5 @@ private:
 	WoodenShader* mShader;
 
 	static WoodenPatternMap* msPatternMap;
+	static WoodenBumpMap* msBumpMap;
 };

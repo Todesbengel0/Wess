@@ -3,6 +3,7 @@
 
 #include "WoodenShader.h"
 #include "WoodenPatternMap.h"
+#include "WoodenBumpMap.h"
 
 WoodenPiece::WoodenPiece()
 	: mShader(ShaderManager::getShader<WoodenShader>(":/shaders/Wooden.vert", ":/shaders/Wooden.frag"))
@@ -25,11 +26,12 @@ void WoodenPiece::Init(Drawable* draw, QVector3D base_color, float shininess)
 	mMat->setShininess(shininess);
 
 	draw->setProperty(mMat);
-	//draw->setProperty(new Texture(":/textures/wood_pattern.png"));
 	if (!msPatternMap)
 		msPatternMap = new WoodenPatternMap;
 	draw->setProperty(msPatternMap);
-	//draw->setProperty(&mShader->GetTexNormal());
+	if (!msBumpMap)
+		msBumpMap = new WoodenBumpMap;
+	draw->setProperty(msBumpMap);
 	draw->setShader(mShader);
 }
 
@@ -39,3 +41,5 @@ WoodenShader* WoodenPiece::GetShader()
 }
 
 WoodenPatternMap* WoodenPiece::msPatternMap;
+
+WoodenBumpMap* WoodenPiece::msBumpMap;

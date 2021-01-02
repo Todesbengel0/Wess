@@ -11,6 +11,7 @@ SOURCES += \
     ChessBoard.cpp \
     Game.cpp \
     Graveyard.cpp \
+    WoodenBumpMap.cpp \
     WoodenPatternMap.cpp \
     WoodenPiece.cpp \
     WoodenShader.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     Queen.h \
     Rook.h \
     Selection.h \
+    WoodenBumpMap.h \
     WoodenPatternMap.h \
     WoodenPiece.h \
     WoodenShader.h
