@@ -1,8 +1,8 @@
 #sginclude "://shaders/commonlightmodels.inc"
 
 // uniform passed textures
-uniform float hasTexPattern = 0.0;
-uniform sampler2D TexPattern;
+uniform float hasPatternMap = 0.0;
+uniform sampler2D PatternMap;
 uniform float hasTexNormal = 0.0;
 uniform sampler2D TexNormal;
 
@@ -26,9 +26,9 @@ void main()
 	vec3 phongColor = phong(viewPosition, normalize(viewDirection), normalize(eyeNormal.xyz), vec3(1.0));
 
 	vec3 patternColor = phongColor;
-	if (hasTexPattern > 0.5)
+	if (hasPatternMap > 0.5)
 	{
-		vec4 patternFrag = texture(TexPattern, texCoords);
+		vec4 patternFrag = texture(PatternMap, texCoords);
 		//patternColor = patternFrag.xyz;
 
 		float factor = 1.0 - ((patternFrag.x + patternFrag.y + patternFrag.z) / 3.0);

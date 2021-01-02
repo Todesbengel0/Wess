@@ -4,7 +4,7 @@
 WoodenPatternMap::WoodenPatternMap()
 	: Texture(":/textures/wood_pattern.png", 1)
 {
-	setNameString("TexPattern");
+	setNameString("PatternMap");
 }
 
 WoodenPatternMap::~WoodenPatternMap() = default;
