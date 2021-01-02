@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ChessFieldActor.h"
 
+#include "ActorHighlight.h"
+
 ChessFieldActor::ChessFieldActor()
 	: mFieldColor(ChessColor::Black)
 	, mHighlighted(false)
@@ -23,6 +25,8 @@ void ChessFieldActor::Init(ChessColor color, Geometry* geo)
 	const QVector3D draw_col = GetDrawColor();
 	mDrawColor = new Color(draw_col.x(), draw_col.y(), draw_col.z());
 	mDraw->setProperty<Color>(mDrawColor);
+
+	mDraw->getProperty<ActorHighlight>()->SetHighlightColor(QVector3D(0.8f, 0.0f, 0.0f));
 }
 
 ChessColor ChessFieldActor::GetFieldColor() const
@@ -57,13 +61,5 @@ void ChessFieldActor::SetHighlighted(bool highlighted)
 
 	mHighlighted = highlighted;
 
-	if (mHighlighted)
-	{
-		static Color col_highlighted(0.8f, 0.0f, 0.0f);
-		mDraw->setProperty<Color>(&col_highlighted);
-	}
-	else
-	{
-		mDraw->setProperty<Color>(mDrawColor);
-	}
+	mDraw->getProperty<ActorHighlight>()->SetHighlighted(mHighlighted);
 }

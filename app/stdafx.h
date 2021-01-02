@@ -19,6 +19,7 @@
 #include <listener.h>
 #include <inputregistry.h>
 #include <shader.h>
+#include <shadertimed.h>
 #include <shadermanager.h>
 #include <pointlight.h>
 #include <material.h>

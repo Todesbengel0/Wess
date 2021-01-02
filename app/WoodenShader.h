@@ -1,6 +1,6 @@
 #pragma once
 
-class WoodenShader : public Shader
+class WoodenShader : public ShaderTimed
 {
 public:
 	WoodenShader();

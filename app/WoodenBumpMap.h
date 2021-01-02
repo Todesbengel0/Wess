@@ -12,5 +12,5 @@ public:
 	static DrawablePropertyId getPropertyId();
 
 	//! \see DrawableProperty::getId()
-	virtual DrawablePropertyId getId() const override;
+	DrawablePropertyId getId() const override;
 };

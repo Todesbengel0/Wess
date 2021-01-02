@@ -3,6 +3,7 @@
 
 WoodenShader::WoodenShader()
 {
+	setMsecsPerIteration(2000);
 }
 
 WoodenShader::~WoodenShader() = default;

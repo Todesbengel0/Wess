@@ -8,6 +8,7 @@ include(../sgframework/Common.pri)
 
 TARGET = App
 SOURCES += \
+    ActorHighlight.cpp \
     ChessBoard.cpp \
     Game.cpp \
     Graveyard.cpp \
@@ -32,6 +33,7 @@ FORMS += \
     dockwidget.ui
 
 HEADERS += \
+    ActorHighlight.h \
     ChessBoard.h \
     Game.h \
     Bishop.h \

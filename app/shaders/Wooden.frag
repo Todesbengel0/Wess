@@ -6,6 +6,15 @@ uniform sampler2D PatternMap;
 uniform float hasNormalMap = 0.0;
 uniform sampler2D NormalMap;
 
+// uniform passed animation
+uniform float Time;
+uniform const float Pi = 3.141;
+
+// uniform passed others
+uniform float Highlighted = 0.0;
+uniform vec3 HighlightCol = vec3(1.0, 0.0, 0.0);
+uniform vec2 HighlightFactor = vec2(0.2, 0.5);
+
 // uniform parameters
 uniform vec3 colWoodDark = vec3(0.61, 0.44, 0.30);
 
@@ -72,6 +81,7 @@ void main()
 		normal = perturb_normal(normal, viewPosition, texCoords);
 	}
 
+	// Lighting
 	vec3 phongColor = phong(viewPosition, normalize(viewDirection), normal, vec3(1.0));
 
 	// Wood pattern
@@ -88,6 +98,13 @@ void main()
 		patternColor = mix(phongColor, colWoodDark, factor);
 	}
 
-    fragColor = vec4(patternColor + material.emission.rgb, materialAlpha);
+	// Highlight
+	vec3 highlightColor = patternColor;
+	if (Highlighted > 0.5)
+	{
+		highlightColor = mix(patternColor, HighlightCol, mix(HighlightFactor.x, HighlightFactor.y, sin(Time * Pi)));
+	}
+
+    fragColor = vec4(highlightColor + material.emission.rgb, materialAlpha);
     //fragColor = vec4(0.0, 0.0, 1.0, 1.0);
 }
