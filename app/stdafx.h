@@ -22,6 +22,7 @@
 #include <shadermanager.h>
 #include <pointlight.h>
 #include <material.h>
+#include <texture.h>
 
 // common project includes
 

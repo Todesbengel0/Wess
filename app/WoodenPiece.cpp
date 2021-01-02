@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "WoodenPiece.h"
+
 #include "WoodenShader.h"
+#include "WoodenPatternMap.h"
 
 WoodenPiece::WoodenPiece()
 	: mShader(ShaderManager::getShader<WoodenShader>(":/shaders/Wooden.vert", ":/shaders/Wooden.frag"))
@@ -23,6 +25,11 @@ void WoodenPiece::Init(Drawable* draw, QVector3D base_color, float shininess)
 	mMat->setShininess(shininess);
 
 	draw->setProperty(mMat);
+	//draw->setProperty(new Texture(":/textures/wood_pattern.png"));
+	if (!msPatternMap)
+		msPatternMap = new WoodenPatternMap;
+	draw->setProperty(msPatternMap);
+	//draw->setProperty(&mShader->GetTexNormal());
 	draw->setShader(mShader);
 }
 
@@ -30,3 +37,5 @@ WoodenShader* WoodenPiece::GetShader()
 {
 	return mShader;
 }
+
+WoodenPatternMap* WoodenPiece::msPatternMap;

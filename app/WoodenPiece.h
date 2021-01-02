@@ -1,6 +1,7 @@
 #pragma once
 
 class WoodenShader;
+class WoodenPatternMap;
 class WoodenPiece
 {
 public:
@@ -16,4 +17,6 @@ public:
 private:
 	Material* mMat;
 	WoodenShader* mShader;
+
+	static WoodenPatternMap* msPatternMap;
 };

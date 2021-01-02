@@ -6,6 +6,9 @@ out vec3 viewDirection;
 out vec3 eyeNormal;
 out float materialAlpha;
 
+in vec2 textureCoords;
+out vec2 texCoords;
+
 void main()
 {
 	// Phong pass to FS
@@ -16,4 +19,7 @@ void main()
 
 	// Only do pos transformation
     gl_Position = vPos();
+
+	// Pass texture coords
+    texCoords = textureCoords;
 }

@@ -14,5 +14,6 @@
         <file>shaders/Wooden.vert</file>
         <file>textures/wood_diff.png</file>
         <file>textures/wood_norm.png</file>
+        <file>textures/wood_pattern.png</file>
     </qresource>
 </RCC>

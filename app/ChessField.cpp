@@ -17,7 +17,7 @@ Node* ChessField::Init(Geometry* geo, ChessColor color, float tx, float tz)
 	// make more "wooden-looking"
 	const QVector3D wood_col(ColClamp(158), ColClamp(115), ColClamp(83));
 	const QVector3D field_col(GetDrawColor());
-	const QVector3D mat_col(Lerp(field_col, wood_col, 0.4f));
+	const QVector3D mat_col(Lerp(field_col, wood_col, 0.3f));
 
 	WoodenPiece::Init(mDraw, mat_col, 2.0f);
 

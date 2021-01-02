@@ -2,5 +2,7 @@
 
 class WoodenShader : public Shader
 {
-
+public:
+	WoodenShader();
+	~WoodenShader();
 };
