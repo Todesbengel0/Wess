@@ -83,7 +83,7 @@ Ty* ChessBoard::MakeFigure(int x, int z, Node* nFigureRoot, ChessColor color, fl
 {
 	auto figure = new Ty;
 
-	auto node = figure->Init(color);
+	auto node = figure->Init(color, x, z);
 	figure->SetPosition(x * field_size, -z * field_size);	// Z inverted on RHS
 	nFigureRoot->addChild(node);
 

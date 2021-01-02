@@ -1,15 +1,9 @@
 #include "stdafx.h"
 #include "Rook.h"
 
-Rook::Rook()
-{
+Rook::Rook() = default;
 
-}
-
-Rook::~Rook()
-{
-
-}
+Rook::~Rook() = default;
 
 QString Rook::GetMeshFilePath() const
 {

@@ -1,15 +1,9 @@
 #include "stdafx.h"
 #include "Bishop.h"
 
-Bishop::Bishop()
-{
+Bishop::Bishop() = default;
 
-}
-
-Bishop::~Bishop()
-{
-
-}
+Bishop::~Bishop() = default;
 
 QString Bishop::GetMeshFilePath() const
 {

@@ -10,4 +10,5 @@ public:
 
 protected:
 	QString GetMeshFilePath() const override;
+	void OnInit() override;
 };

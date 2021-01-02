@@ -1,15 +1,9 @@
 #include "stdafx.h"
 #include "Pawn.h"
 
-Pawn::Pawn()
-{
+Pawn::Pawn() = default;
 
-}
-
-Pawn::~Pawn()
-{
-
-}
+Pawn::~Pawn() = default;
 
 QString Pawn::GetMeshFilePath() const
 {

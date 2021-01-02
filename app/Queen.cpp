@@ -1,15 +1,9 @@
 #include "stdafx.h"
 #include "Queen.h"
 
-Queen::Queen()
-{
+Queen::Queen() = default;
 
-}
-
-Queen::~Queen()
-{
-
-}
+Queen::~Queen() = default;
 
 QString Queen::GetMeshFilePath() const
 {
