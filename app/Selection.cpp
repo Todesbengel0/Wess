@@ -50,9 +50,7 @@ Node* Selection::Init() {
 	return nTrans;
 }
 
-Selection::~Selection()
-{
-}
+Selection::~Selection() = default;
 
 ChessField* Selection::setField() {
 	mCurrentField->SetHighlighted(false); // set shader back to normal 
@@ -141,13 +139,14 @@ void Selection::moveRight()
 void Selection::selectFigure()
 {
 	if (mSelectedFigure != nullptr) { // set chesspiece to new position and deselect it 
-		mSelectedFigure->SetHighlighted(false);
-		mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ);
-
-		mSelectedFigure = nullptr;
-
+		if (mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ)) {
+			// unselect chesspiece
+			mSelectedFigure->SetHighlighted(false);
+			mSelectedFigure = nullptr;
+		}
 	}
-	else {  // select chesspiece
+	else {  
+		// select chesspiece
 		mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
 
 		if (mSelectedFigure != nullptr) {
