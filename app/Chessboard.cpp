@@ -213,20 +213,29 @@ Figure* ChessBoard::GetFigure(int x, int z)
 	else return nullptr;
 }
 
-void ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
+bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 {
-	if (mFigures[toz][tox] == nullptr) {
+	// place, if space not occupied already
+	if (mFigures[toz][tox] == nullptr)
+	{
 		mFigures[toz][tox] = mFigures[z][x];
         mFigures[z][x] = nullptr;
-	}
-	else {
-		// teleports slain piece of the board, can later be replaced by a death funktion
-        if (mFigures[toz][tox]->GetFieldColor() == ChessColor::White)
-            mWhiteGraveyard->AddFigure(mFigures[toz][tox]);
-        else if (mFigures[toz][tox]->GetFieldColor() == ChessColor::Black)
-			mBlackGraveyard->AddFigure(mFigures[toz][tox]);
 
-		mFigures[toz][tox] = mFigures[z][x];
-        mFigures[z][x] = nullptr;
+		return true;
 	}
+
+	// check figure can't slain one of their own
+	if (mFigures[toz][tox]->GetFieldColor() == mFigures[z][x]->GetFieldColor())
+		return false;
+
+	// teleports slain piece of the board, can later be replaced by a death funktion
+    if (mFigures[toz][tox]->GetFieldColor() == ChessColor::White)
+        mWhiteGraveyard->AddFigure(mFigures[toz][tox]);
+    else if (mFigures[toz][tox]->GetFieldColor() == ChessColor::Black)
+		mBlackGraveyard->AddFigure(mFigures[toz][tox]);
+
+	mFigures[toz][tox] = mFigures[z][x];
+    mFigures[z][x] = nullptr;
+
+	return true;
 }
