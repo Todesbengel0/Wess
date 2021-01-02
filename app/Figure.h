@@ -1,8 +1,9 @@
 #pragma once
 
 #include "ChessFieldActor.h"
+#include "WoodenPiece.h"
 
-class Figure : public ChessFieldActor
+class Figure : public ChessFieldActor, public WoodenPiece
 {
 // ctor / dtor
 public: 

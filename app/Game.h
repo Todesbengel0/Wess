@@ -35,6 +35,8 @@ public:
 private:
 	Camera* mCam;
 
+	PointLight* mLight;
+
 	Transformation mtRoot;
 	Node* mnRoot;
 

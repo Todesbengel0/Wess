@@ -11,6 +11,8 @@ SOURCES += \
     Chessboard.cpp \
     Game.cpp \
     Graveyard.cpp \
+    WoodenPiece.cpp \
+    WoodenShader.cpp \
     myscene.cpp \
     Bishop.cpp \
     ChessField.cpp \
@@ -42,7 +44,9 @@ HEADERS += \
     Pawn.h \
     Queen.h \
     Rook.h \
-    Selection.h
+    Selection.h \
+    WoodenPiece.h \
+    WoodenShader.h
     stdafx.h
 
 PRECOMPILED_HEADER = stdafx.h

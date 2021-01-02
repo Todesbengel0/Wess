@@ -64,6 +64,7 @@ Node* Chessboard::Init()
 	// bottom base frame of the board
 	mgBaseFrame = new SimpleCube(mSize, base_frame_height * mHeight, mSize);
 	mdBaseFrame = new Drawable(mgBaseFrame);
+	QVector3D base_col(ColClamp(158), ColClamp(115), ColClamp(83));
 	mtBaseFrame.translate(0.0f, -(mHeight - base_frame_height) / 2.0f, 0.0f);	// pos relative to obj center
 	auto ntBaseFrame = new Node(&mtBaseFrame);
 	ntBaseFrame->addChild(new Node(mdBaseFrame));

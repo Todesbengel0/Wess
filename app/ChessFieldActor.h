@@ -16,6 +16,8 @@ protected:
 // getters / setters
 public:
 	ChessColor GetFieldColor() const;
+	static QVector3D GetDrawColorByFieldColor(ChessColor color);
+	QVector3D GetDrawColor() const;
 
 // access
 public:

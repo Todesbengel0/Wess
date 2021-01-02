@@ -1,21 +1,19 @@
 #include "stdafx.h"
 #include "Figure.h"
 
-
 Figure::Figure()
 	: mgMesh(nullptr)
 {
 }
 
-Figure::~Figure()
-{
-}
+Figure::~Figure() = default;
 
 Node* Figure::Init(ChessColor color)
 {
 	mgMesh = GetLoadMesh(GetMeshFilePath());
 
 	ChessFieldActor::Init(color, mgMesh);
+	WoodenPiece::Init(mDraw, GetDrawColor(), 10.0f);
 
 	auto nTrans = new Node(&mtPosition);
 	nTrans->addChild(new Node(mDraw));

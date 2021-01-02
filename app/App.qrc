@@ -6,5 +6,13 @@
         <file>models/pawn.obj</file>
         <file>models/queen.obj</file>
         <file>models/rook.obj</file>
+        <file>shaders/common.vert.inc</file>
+        <file>shaders/commonlight.vert.inc</file>
+        <file>shaders/commonlightmatdefs.inc</file>
+        <file>shaders/commonlightmodels.inc</file>
+        <file>shaders/Wooden.frag</file>
+        <file>shaders/Wooden.vert</file>
+        <file>textures/wood_diff.png</file>
+        <file>textures/wood_norm.png</file>
     </qresource>
 </RCC>
