@@ -1,8 +1,9 @@
 #pragma once
 
 #include "ChessFieldActor.h"
+#include "WoodenPiece.h"
 
-class ChessField : public ChessFieldActor
+class ChessField : public ChessFieldActor, public WoodenPiece
 {
 public:
 	ChessField();

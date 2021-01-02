@@ -28,3 +28,4 @@
 
 // macros
 #define ColClamp(x)	((x) / 255.0f)
+#define Lerp(a,b,t) ((a)+((b)-(a))*t)
