@@ -4,6 +4,7 @@
 Figure::Figure()
     : mInitialX(-1)
 	, mInitialZ(-1)
+    , mPosition(QVector2D(-1, -1))
     , mTypeID(-1)
     , mgMesh(nullptr)
 {
@@ -12,6 +13,7 @@ Figure::Figure()
 Figure::Figure(int typeID)
     : mInitialX(-1)
     , mInitialZ(-1)
+    , mPosition(QVector2D(-1, -1))
     , mTypeID(typeID)
     , mgMesh(nullptr)
 {
@@ -72,12 +74,13 @@ void Figure::FreeMeshes()
 void Figure::SetPosition(float tx, float tz)
 {
 	mtPosition.resetTrafo();
-	mtPosition.translate(tx, 0.0f, tz);
+    mtPosition.translate(tx, 0.0f, tz);
+    mPosition = QVector2D(tx, tz);
 }
 
-void Figure::step(float tx, float tz)
+QVector2D Figure::GetPosition()
 {
-    mtPosition.translate(tx, 0.0f, tz);
+    return mPosition;
 }
 
 int Figure::GetTypeID() const
@@ -103,4 +106,6 @@ int Figure::GetInitialZ() const
 void Figure::MovePosition(float tx, float tz)
 {
     mtPosition.translate(tx, 0.0f, tz);
+    mPosition.setX(mPosition.x()+tx);
+    mPosition.setY(mPosition.y()+tz);
 }

@@ -33,8 +33,13 @@ ChessBoard::~ChessBoard()
 		for (auto figure : line)
 			delete figure;
 
-	// fields
-	delete mgField;
+    for (auto& plane: mPromotionFigures)
+        for (auto& line : plane)
+            for (auto figure : line)
+                delete figure;
+
+    // fields
+    delete mgField;
 
 	// side frame
 	delete mdSideFrame;
@@ -99,7 +104,7 @@ Node* ChessBoard::Init()
 
 	//Selection
     mSelection = new Selection(mfield_size, this);
-	nRoot->addChild(mSelection->Init());
+    nFieldRoot->addChild(mSelection->Init());
 
     // Graveyards
 	// positions are relative to A1 at (0,0)
@@ -195,6 +200,60 @@ void ChessBoard::MakeFigures(Node* nFigureRoot, float field_size)
 	// king
 	MakeFigure<King>(4, 0, nFigureRoot, ChessColor::White, field_size);
 	MakeFigure<King>(4, 7, nFigureRoot, ChessColor::Black, field_size);
+
+    // Promotion presets
+    for (int i = 0; i < 8; ++i)
+    {
+        Figure* figure;
+        Node* node;
+        figure = new Queen;
+        node = figure->Init(ChessColor::White, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[0][3][i] = figure;
+
+        figure = new Queen;
+        node = figure->Init(ChessColor::Black, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[1][3][i] = figure;
+
+        figure = new Rook;
+        node = figure->Init(ChessColor::White, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[0][2][i] = figure;
+
+        figure = new Rook;
+        node = figure->Init(ChessColor::Black, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[1][2][i] = figure;
+
+        figure = new Bishop;
+        node = figure->Init(ChessColor::White, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[0][1][i] = figure;
+
+        figure = new Bishop;
+        node = figure->Init(ChessColor::Black, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[1][1][i] = figure;
+
+        figure = new Knight;
+        node = figure->Init(ChessColor::White, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[0][0][i] = figure;
+
+        figure = new Knight;
+        node = figure->Init(ChessColor::Black, 4, 4);
+        figure->SetPosition(-500, -500);	// Z inverted on RHS
+        nFigureRoot->addChild(node);
+        mPromotionFigures[1][0][i] = figure;
+    }
 }
 
 const Transformation& ChessBoard::GetRootTrafo() const
@@ -220,6 +279,10 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
     // check if x, z, tox and toz are valid koordinates
     if (x < 0 || x > 7 || z < 0 || z > 7 || tox < 0 || tox > 7 || toz < 0 || toz > 7)
         return false;
+
+    // check if figure only wants to be deselected (no movement)
+    if (x==tox && z==toz)
+        return true;
 
     // check if figure can actually move that way
     if (!mFigures[z][x]->ValidMovement(x, z, tox, toz, this))
@@ -272,4 +335,24 @@ float ChessBoard::GetFieldSize()
 Figure* ChessBoard::GetSpeedyPawn()
 {
     return mSpeedyPawn;
+}
+
+void ChessBoard::Promote(int x, int z, int type)
+{
+    if(!mFigures[z][x])
+        return;
+    auto color = mFigures[z][x]->GetFieldColor();
+    if(mFigures[z][x]->GetTypeID()!=0 || z!=((color==White)?7:0))
+        return;
+    Figure* pawn = mFigures[z][x];
+    Figure* promotedFigure = nullptr;
+    for (int i = 0; i < 8; ++i)
+        if ((promotedFigure = mPromotionFigures[(color==White)?0:1][type-1][i])->GetTypeID()!=0)
+        {
+            mFigures[z][x] = promotedFigure;
+            mPromotionFigures[(color==White)?0:1][type-1][i] = pawn;
+            break;
+        }
+    pawn->SetPosition(-500, -500);
+    promotedFigure->SetPosition(x*mfield_size, -z*mfield_size);
 }

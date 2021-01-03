@@ -41,6 +41,11 @@ public:
     float GetFieldSize();
     Figure* GetSpeedyPawn();
 
+// public methods
+public:
+    //! Promotes a pawn to a figure of a specific type
+    void Promote(int x, int z, int type);
+
 // members
 private:
 	const float mSize;
@@ -74,6 +79,7 @@ private:
 	// figure position on chessboard
 	Transformation mtFigureRoot;
 	Figure* mFigures[8][8];
+    Figure* mPromotionFigures[2][4][8];
 
 	//Selection
 	Selection* mSelection;

@@ -25,8 +25,8 @@ private:
 
 // getters / setters
 public:
-	void SetPosition(float tx, float tz);
-	void step(float x, float z);
+    void SetPosition(float tx, float tz);
+    QVector2D GetPosition();
     int GetTypeID() const;
 protected:
 	Transformation& GetRotationTrafo();
@@ -45,6 +45,7 @@ private:
 	float mSize;
 	int mInitialX;
 	int mInitialZ;
+    QVector2D mPosition;
     int mTypeID;
 
 // scene objects

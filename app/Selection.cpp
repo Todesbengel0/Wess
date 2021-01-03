@@ -9,17 +9,17 @@
 
 
 
-Selection::Selection(float fieldSize, ChessBoard* chessBoard):
-	mFieldSize(fieldSize),
-	mFigureSelected(false),
-	mChessBoard(chessBoard),
-	mCurrentField(nullptr),
-	mSelectedFigure(nullptr)	
+Selection::Selection(float fieldSize, ChessBoard* chessBoard)
+    : mFieldSize(fieldSize),
+      mFigureSelected(false),
+      mIsPromoting(false),
+      mChessBoard(chessBoard),
+      mCurrentField(nullptr),
+      mSelectedFigure(nullptr),
+      mShownFigure(nullptr)
 {
 	mPositionX = 0;
 	mPositionZ = 0;
-
-
 }
 
 Node* Selection::Init() {
@@ -60,102 +60,184 @@ ChessField* Selection::setField() {
 	return field;
 }
 
-void Selection::moveUp()
+void Selection::MoveUp()
 {
 	if (mPositionZ < 7) {
 		mPositionZ += 1;
 		mCurrentField = setField();
 
-		if (mSelectedFigure != nullptr) {
-			mSelectedFigure->step(0, -mFieldSize);
-		}
+        if (mSelectedFigure != nullptr)
+            mSelectedFigure->MovePosition(0, -mFieldSize);
 
-		mfPawn->step(0, -mFieldSize);
-		mfRook->step(0, -mFieldSize);
-		mfKnight->step(0, -mFieldSize);
-		mfBishop->step(0, -mFieldSize);
-		mfQueen->step(0, -mFieldSize);
-		mfKing->step(0, -mFieldSize);
+        mfPawn->MovePosition(0, -mFieldSize);
+        mfRook->MovePosition(0, -mFieldSize);
+        mfKnight->MovePosition(0, -mFieldSize);
+        mfBishop->MovePosition(0, -mFieldSize);
+        mfQueen->MovePosition(0, -mFieldSize);
+        mfKing->MovePosition(0, -mFieldSize);
 	}
 }
 
-void Selection::moveDown()
+void Selection::MoveDown()
 {
 	if (mPositionZ > 0) {
 		mPositionZ -= 1;
 		mCurrentField = setField();
 
-		if (mSelectedFigure != nullptr) {
-			mSelectedFigure->step(0, mFieldSize);
-		}
+        if (mSelectedFigure != nullptr)
+            mSelectedFigure->MovePosition(0, mFieldSize);
 
-		mfPawn->step(0, mFieldSize);
-		mfRook->step(0, mFieldSize);
-		mfKnight->step(0, mFieldSize);
-		mfBishop->step(0, mFieldSize);
-		mfQueen->step(0, mFieldSize);
-		mfKing->step(0, mFieldSize);
+        mfPawn->MovePosition(0, mFieldSize);
+        mfRook->MovePosition(0, mFieldSize);
+        mfKnight->MovePosition(0, mFieldSize);
+        mfBishop->MovePosition(0, mFieldSize);
+        mfQueen->MovePosition(0, mFieldSize);
+        mfKing->MovePosition(0, mFieldSize);
 	}
 }
 
-void Selection::moveLeft()
+void Selection::MoveLeft()
 {
 	if (mPositionX > 0) {
 		mPositionX -= 1;
 		mCurrentField = setField();
 
-		if (mSelectedFigure != nullptr) {
-			mSelectedFigure->step(-mFieldSize, 0);
-		}
+        if (mSelectedFigure != nullptr)
+            mSelectedFigure->MovePosition(-mFieldSize, 0);
 
-		mfPawn->step(-mFieldSize, 0);
-		mfRook->step(-mFieldSize, 0);
-		mfKnight->step(-mFieldSize, 0);
-		mfBishop->step(-mFieldSize, 0);
-		mfQueen->step(-mFieldSize, 0);
-		mfKing->step(-mFieldSize, 0);
+        mfPawn->MovePosition(-mFieldSize, 0);
+        mfRook->MovePosition(-mFieldSize, 0);
+        mfKnight->MovePosition(-mFieldSize, 0);
+        mfBishop->MovePosition(-mFieldSize, 0);
+        mfQueen->MovePosition(-mFieldSize, 0);
+        mfKing->MovePosition(-mFieldSize, 0);
 	}
 }
 
-void Selection::moveRight()
+void Selection::MoveRight()
 {
 	if (mPositionX < 7) {
 		mPositionX += 1;
 		mCurrentField = setField();
 
-		if (mSelectedFigure != nullptr) {
-			mSelectedFigure->step(mFieldSize, 0);
-		}
+        if (mSelectedFigure != nullptr)
+            mSelectedFigure->MovePosition(mFieldSize, 0);
 
-		mfPawn->step(mFieldSize, 0);
-		mfRook->step(mFieldSize, 0);
-		mfKnight->step(mFieldSize, 0);
-		mfBishop->step(mFieldSize, 0);
-		mfQueen->step(mFieldSize, 0);
-		mfKing->step(mFieldSize, 0);
+        mfPawn->MovePosition(mFieldSize, 0);
+        mfRook->MovePosition(mFieldSize, 0);
+        mfKnight->MovePosition(mFieldSize, 0);
+        mfBishop->MovePosition(mFieldSize, 0);
+        mfQueen->MovePosition(mFieldSize, 0);
+        mfKing->MovePosition(mFieldSize, 0);
 	}
 }
 
-void Selection::selectFigure()
+void Selection::SelectFigure()
 {
-	if (mSelectedFigure != nullptr) { // set chesspiece to new position and deselect it 
-		if (mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ)) {
-			// unselect chesspiece
-			mSelectedFigure->SetHighlighted(false);
-			mSelectedFigure = nullptr;
+    if (mSelectedFigure != nullptr)
+    { // set chesspiece to new position and deselect it
+        if (mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ)) {
+            if ((mPositionZ != 0 && mPositionZ != 7) || mSelectedFigure->GetTypeID()!=0)
+            {
+                // unselect chesspiece
+                mSelectedFigure->SetHighlighted(false);
+                mSelectedFigure = nullptr;
+                return;
+            }
+            // promotion
+            PromotionInit();
 		}
-	}
-	else {  
-		// select chesspiece
-		mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
+        return;
+    }
+    // select chesspiece
+    mSelectedFigure = mChessBoard->GetFigure(mPositionX, mPositionZ);
 
-		if (mSelectedFigure != nullptr) {
-			mSelectedFigure->SetHighlighted(true);
+    if (mSelectedFigure != nullptr) {
+        mSelectedFigure->SetHighlighted(true);
 
-			mSelectionX = mPositionX;
-			mSelectionZ = mPositionZ;
-		}
-	}
+        mSelectionX = mPositionX;
+        mSelectionZ = mPositionZ;
+    }
+}
+
+void Selection::PromotionInit()
+{
+    mIsPromoting = true;
+    float tempX = mSelectedFigure->GetPosition().x(), tempZ = mSelectedFigure->GetPosition().y();
+    mShownFigure = mfQueen;
+    mSelectedFigure->SetPosition(mShownFigure->GetPosition().x(), mShownFigure->GetPosition().y());
+    mShownFigure->SetHighlighted(true);
+    mShownFigure->SetPosition(tempX, tempZ);
+}
+
+void Selection::ShowNext()
+{
+    switch(mShownFigure->GetTypeID())
+    {
+    case 1:
+        ShowFigure(mfBishop);
+        return;
+    case 2:
+        ShowFigure(mfRook);
+        return;
+    case 3:
+        ShowFigure(mfQueen);
+        return;
+    case 4:
+        ShowFigure(mfKnight);
+        return;
+    default:
+        return;
+    }
+}
+
+void Selection::ShowPrevious()
+{
+    switch(mShownFigure->GetTypeID())
+    {
+    case 1:
+        ShowFigure(mfQueen);
+        return;
+    case 2:
+        ShowFigure(mfKnight);
+        return;
+    case 3:
+        ShowFigure(mfBishop);
+        return;
+    case 4:
+        ShowFigure(mfRook);
+        return;
+    default:
+        return;
+    }
+}
+
+void Selection::ShowFigure(Figure *shownFigure)
+{
+    this->PromotionReset();
+    float tempX = mSelectedFigure->GetPosition().x(), tempZ = mSelectedFigure->GetPosition().y();
+    mShownFigure = shownFigure;
+    mSelectedFigure->SetPosition(mShownFigure->GetPosition().x(), mShownFigure->GetPosition().y());
+    mShownFigure->SetHighlighted(true);
+    mShownFigure->SetPosition(tempX, tempZ);
+}
+
+void Selection::PromotionReset()
+{
+    float tempX = mSelectedFigure->GetPosition().x(), tempZ = mSelectedFigure->GetPosition().y();
+    mSelectedFigure->SetPosition(mShownFigure->GetPosition().x(), mShownFigure->GetPosition().y());
+    mShownFigure->SetHighlighted(false);
+    mShownFigure->SetPosition(tempX, tempZ);
+}
+
+void Selection::PromotionFinit()
+{
+    this->PromotionReset();
+    mSelectedFigure->SetHighlighted(false);
+    mSelectedFigure = nullptr;
+    mChessBoard->Promote(mPositionX, mPositionZ, mShownFigure->GetTypeID());
+    mShownFigure = nullptr;
+    mIsPromoting = false;
 }
 
 
@@ -166,24 +248,14 @@ void Selection::keyboard(int, int)
 {
 	auto key_in = InputRegistry::getInstance().getKeyboardInput();
 
-	if (key_in->isKeyPressed('j'))
-	{
-		moveLeft();
-	}
-	else if (key_in->isKeyPressed('i'))
-	{
-		moveUp();
-	}
-	else if (key_in->isKeyPressed('k'))
-	{
-		moveDown();
-	}
-	else if (key_in->isKeyPressed('l'))
-	{
-		moveRight();
-	}
-
-	else if (key_in->isKeyPressed('+')) {
-		selectFigure();
-	}
+    if (key_in->isKeyPressed('j'))
+        mIsPromoting?ShowPrevious():MoveLeft();
+    else if (key_in->isKeyPressed('i'))
+        mIsPromoting?ShowNext():MoveUp();
+    else if (key_in->isKeyPressed('k'))
+        mIsPromoting?ShowPrevious():MoveDown();
+    else if (key_in->isKeyPressed('l'))
+        mIsPromoting?ShowNext():MoveRight();
+    else if (key_in->isKeyPressed('+'))
+        mIsPromoting?PromotionFinit():SelectFigure();
 }

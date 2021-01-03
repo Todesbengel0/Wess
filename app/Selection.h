@@ -11,11 +11,19 @@ public:
 	~Selection();
 	Node* Init();
 
-	void moveUp();
-	void moveDown();
-	void moveLeft();
-	void moveRight();
-	void selectFigure();
+    void MoveUp();
+    void MoveDown();
+    void MoveLeft();
+    void MoveRight();
+    void SelectFigure();
+
+    //Promotion
+    void PromotionInit();
+    void ShowNext();
+    void ShowPrevious();
+    void ShowFigure(Figure* shownFigure);
+    void PromotionReset();
+    void PromotionFinit();
 
 	void keyboard(int, int) override;
 	
@@ -28,6 +36,7 @@ private:
 	bool mFigureSelected;
 	int mSelectionX;
 	int mSelectionZ;
+    bool mIsPromoting;
 
 	Transformation mtPosition;
 
@@ -41,5 +50,8 @@ private:
 	Figure* mfBishop;
 	Figure* mfQueen;
 	Figure* mfKing;
+
+    //Promotion
+    Figure* mShownFigure;
 };
 
