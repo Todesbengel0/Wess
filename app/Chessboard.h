@@ -36,13 +36,18 @@ public:
 	ChessField* GetField(int x, int z); 
 	Figure* GetFigure(int x, int z);
 	bool SetFigureOnField(int x, int z, int tox, int toz);
+    //! Setze die Figur auf ein Feld, ohne irgendwelche Logik zu beachten (Handle with Caution!)
+    bool SetFigureOnFieldNoLogic(int x, int z, int tox, int toz);
     float GetFieldSize();
+    Figure* GetSpeedyPawn();
 
 // members
 private:
 	const float mSize;
 	const float mHeight;
     float mfield_size;
+    //! Bauer, der im letzten regulären Zug, zwei Felder nach vorne bewegt wurde
+    Figure* mSpeedyPawn;
 
 // scene objects
 private:

@@ -32,19 +32,7 @@ Node* Graveyard::Init()
 
 void Graveyard::AddFigure(Figure* deadFigure)
 {
-    short figureValue = 0;
-    if (dynamic_cast<Pawn*>(deadFigure))
-        figureValue = 0;
-    else if (dynamic_cast<Knight*>(deadFigure))
-        figureValue = 1;
-    else if (dynamic_cast<Bishop*>(deadFigure))
-        figureValue = 2;
-    else if (dynamic_cast<Rook*>(deadFigure))
-        figureValue = 3;
-    else if (dynamic_cast<Queen*>(deadFigure))
-        figureValue = 4;
-    else if (dynamic_cast<King*>(deadFigure))
-        figureValue = 5;
+    short figureValue = deadFigure->GetTypeID();
     for (int j = 0; j < 6; ++j)
     {
         if (!mFigures[j][0])
@@ -53,19 +41,7 @@ void Graveyard::AddFigure(Figure* deadFigure)
             MoveFigure(deadFigure, j, 0);
             return;
         }
-        short graveyardFValue = 0;
-        if (dynamic_cast<Pawn*>(mFigures[j][0]))
-            graveyardFValue = 0;
-        else if (dynamic_cast<Knight*>(mFigures[j][0]))
-            graveyardFValue = 1;
-        else if (dynamic_cast<Bishop*>(mFigures[j][0]))
-            graveyardFValue = 2;
-        else if (dynamic_cast<Rook*>(mFigures[j][0]))
-            graveyardFValue = 3;
-        else if (dynamic_cast<Queen*>(mFigures[j][0]))
-            graveyardFValue = 4;
-        else if (dynamic_cast<King*>(mFigures[j][0]))
-            graveyardFValue = 5;
+        short graveyardFValue = mFigures[j][0]->GetTypeID();
         if (graveyardFValue < figureValue)
             continue;
         if (graveyardFValue == figureValue)

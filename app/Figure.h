@@ -10,6 +10,7 @@ class Figure : public ChessFieldActor, public WoodenPiece
 // ctor / dtor
 public: 
 	Figure();
+    Figure(int typeID);
 	~Figure();
 
 // initialization
@@ -26,6 +27,7 @@ private:
 public:
 	void SetPosition(float tx, float tz);
 	void step(float x, float z);
+    int GetTypeID() const;
 protected:
 	Transformation& GetRotationTrafo();
 	int GetInitialX() const;
@@ -43,6 +45,7 @@ private:
 	float mSize;
 	int mInitialX;
 	int mInitialZ;
+    int mTypeID;
 
 // scene objects
 private:

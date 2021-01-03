@@ -14,6 +14,7 @@ ChessBoard::ChessBoard(float size, float height)
 	: mSize(size)
 	, mHeight(height)
     , mfield_size(1)
+    , mSpeedyPawn(nullptr)
 	, mgBaseFrame(nullptr)
 	, mdBaseFrame(nullptr)
 	, mgSideFrame(nullptr)
@@ -216,6 +217,10 @@ Figure* ChessBoard::GetFigure(int x, int z)
 
 bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 {
+    // check if x, z, tox and toz are valid koordinates
+    if (x < 0 || x > 7 || z < 0 || z > 7 || tox < 0 || tox > 7 || toz < 0 || toz > 7)
+        return false;
+
     // check if figure can actually move that way
     if (!mFigures[z][x]->ValidMovement(x, z, tox, toz, this))
         return false;
@@ -226,6 +231,10 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 		mFigures[toz][tox] = mFigures[z][x];
         mFigures[z][x] = nullptr;
 
+        if(mFigures[toz][tox]->GetTypeID()==0 && abs(toz-z)==2)
+            mSpeedyPawn = mFigures[toz][tox];
+        else
+            mSpeedyPawn = nullptr;
 		return true;
 	}
 
@@ -241,11 +250,26 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 
 	mFigures[toz][tox] = mFigures[z][x];
     mFigures[z][x] = nullptr;
+    mSpeedyPawn = nullptr;
+    return true;
+}
 
+bool ChessBoard::SetFigureOnFieldNoLogic(int x, int z, int tox, int toz)
+{
+    // check if x, z, tox and toz are valid koordinates
+    if (x < 0 || x > 7 || z < 0 || z > 7 || tox < 0 || tox > 7 || toz < 0 || toz > 7)
+        return false;
+    mFigures[toz][tox] = mFigures[z][x];
+    mFigures[z][x] = nullptr;
     return true;
 }
 
 float ChessBoard::GetFieldSize()
 {
     return mfield_size;
+}
+
+Figure* ChessBoard::GetSpeedyPawn()
+{
+    return mSpeedyPawn;
 }

@@ -2,9 +2,18 @@
 #include "Figure.h"
 
 Figure::Figure()
-	: mgMesh(nullptr)
-	, mInitialX(-1)
+    : mInitialX(-1)
 	, mInitialZ(-1)
+    , mTypeID(-1)
+    , mgMesh(nullptr)
+{
+}
+
+Figure::Figure(int typeID)
+    : mInitialX(-1)
+    , mInitialZ(-1)
+    , mTypeID(typeID)
+    , mgMesh(nullptr)
 {
 }
 
@@ -68,7 +77,12 @@ void Figure::SetPosition(float tx, float tz)
 
 void Figure::step(float tx, float tz)
 {
-	mtPosition.translate(tx, 0.0f, tz);
+    mtPosition.translate(tx, 0.0f, tz);
+}
+
+int Figure::GetTypeID() const
+{
+    return mTypeID;
 }
 
 Transformation& Figure::GetRotationTrafo()

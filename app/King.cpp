@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "King.h"
 #include "Chessboard.h"
-#include "Rook.h"
 
-King::King() = default;
+King::King() : Figure(5){}
 
 King::~King() = default;
 
@@ -19,9 +18,9 @@ bool King::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosi
             if (board->GetFigure(5, zStartPosition) || board->GetFigure(6, zStartPosition) || !board->GetFigure(7, zStartPosition))
                 return false;
             Figure* figure = board->GetFigure(7, zStartPosition);
-            if (!(dynamic_cast<Rook*>(figure)) || (figure->GetFieldColor()==White)!=isWhite)
+            if (figure->GetTypeID()!=3 || (figure->GetFieldColor()==White)!=isWhite)
                 return false;
-            board->SetFigureOnField(7, zStartPosition, 5, zStartPosition);
+            board->SetFigureOnFieldNoLogic(7, zStartPosition, 5, zStartPosition);
             figure->MovePosition(-board->GetFieldSize()*2, 0);
             return true;
         }
@@ -30,9 +29,9 @@ bool King::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosi
             if (board->GetFigure(3, zStartPosition) || board->GetFigure(2, zStartPosition) || board->GetFigure(1, zStartPosition) || !board->GetFigure(0, zStartPosition))
                 return false;
             Figure* figure = board->GetFigure(0, zStartPosition);
-            if (!(dynamic_cast<Rook*>(figure)) || (figure->GetFieldColor()==White)!=isWhite)
+            if (figure->GetTypeID()!=3 || (figure->GetFieldColor()==White)!=isWhite)
                 return false;
-            board->SetFigureOnField(0, zStartPosition, 3, zStartPosition);
+            board->SetFigureOnFieldNoLogic(0, zStartPosition, 3, zStartPosition);
             figure->MovePosition(board->GetFieldSize()*3, 0);
             return true;
         }
