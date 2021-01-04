@@ -43,5 +43,9 @@ private:
 	HelperAxes* mHelperAxes;
 
 	ChessBoard* mChessboard;
+
+	Transformation mtEnvironmentSphere;
+	TriangleMesh* mgEnvironmentSphere;
+	Drawable* mdEnvironmentSphere;
 };
 

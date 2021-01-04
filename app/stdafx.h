@@ -24,6 +24,7 @@
 #include <pointlight.h>
 #include <material.h>
 #include <texture.h>
+#include <simplesphere.h>
 
 // common project includes
 
