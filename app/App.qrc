@@ -15,10 +15,10 @@
         <file>textures/wood_diff.png</file>
         <file>textures/wood_norm.png</file>
         <file>textures/wood_pattern.png</file>
-        <file>textures/environment.jpg</file>
         <file>shaders/Environment.frag</file>
         <file>shaders/Environment.vert</file>
         <file>models/env_sphere.obj</file>
         <file>models/table.obj</file>
+        <file>textures/environment.jpg</file>
     </qresource>
 </RCC>

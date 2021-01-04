@@ -8,6 +8,8 @@
 
 #include "Chessboard.h"
 #include "HelperAxes.h"
+#include "EnvSphere.h"
+#include "EnvTable.h"
 
 class Game
 {
@@ -44,8 +46,8 @@ private:
 
 	ChessBoard* mChessboard;
 
-	Transformation mtEnvironmentSphere;
-	TriangleMesh* mgEnvironmentSphere;
-	Drawable* mdEnvironmentSphere;
+	// environment
+	EnvSphere* mEnvSphere;
+	EnvTable* mEnvTable;
 };
 

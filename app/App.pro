@@ -10,6 +10,8 @@ TARGET = App
 SOURCES += \
     ActorHighlight.cpp \
     ChessBoard.cpp \
+    EnvSphere.cpp \
+    EnvTable.cpp \
     Game.cpp \
     Graveyard.cpp \
     WoodenBumpMap.cpp \
@@ -35,6 +37,8 @@ FORMS += \
 HEADERS += \
     ActorHighlight.h \
     ChessBoard.h \
+    EnvSphere.h \
+    EnvTable.h \
     Game.h \
     Bishop.h \
     ChessColor.h \

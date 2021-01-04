@@ -7,8 +7,8 @@ Game::Game()
 	, mnRoot(nullptr)
 	, mHelperAxes(nullptr)
 	, mChessboard(nullptr)
-	, mgEnvironmentSphere(nullptr)
-	, mdEnvironmentSphere(nullptr)
+	, mEnvSphere(nullptr)
+	, mEnvTable(nullptr)
 {
 }
 
@@ -23,8 +23,8 @@ Game::~Game()
 	delete mChessboard;
 
 	// free environment
-	delete mdEnvironmentSphere;
-	delete mgEnvironmentSphere;
+	delete mEnvSphere;
+	delete mEnvTable;
 
 	// free helper axes
 	delete mHelperAxes;
@@ -66,14 +66,10 @@ Node* Game::Init(Camera* cam)
 	mnRoot->addChild(mChessboard->Init());
 
 	// environment
-	mgEnvironmentSphere = new TriangleMesh(":/models/env_sphere.obj");
-	mdEnvironmentSphere = new Drawable(mgEnvironmentSphere);
-	mdEnvironmentSphere->getProperty<Texture>()->loadPicture(":/textures/environment.jpg");
-	mdEnvironmentSphere->setShader(ShaderManager::getShader(":/shaders/Environment.vert", ":/shaders/Environment.frag"));
-	auto nEnvironmentSphere = new Node(&mtEnvironmentSphere);
-	nEnvironmentSphere->addChild(new Node(mdEnvironmentSphere));
-	mnRoot->addChild(nEnvironmentSphere);
-
+	mEnvSphere = new EnvSphere;
+	mnRoot->addChild(mEnvSphere->Init());
+	mEnvTable = new EnvTable;
+	mnRoot->addChild(mEnvTable->Init());
 
 	// initial camera position
 	//mCam->setPosition(-15.0f, 8.0f, -15.0f);
