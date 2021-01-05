@@ -20,3 +20,12 @@ QString Bishop::GetMeshFilePath() const
 {
     return ":/models/bishop.obj";
 }
+
+void Bishop::OnInit()
+{
+	// fix rotation
+	float rot = 90.0f;
+	if (GetInitialX() < 4)
+		rot = -rot;
+	GetRotationTrafo().rotate(rot, 0.0f, 1.0f, 0.0f);
+}
