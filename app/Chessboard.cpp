@@ -14,6 +14,7 @@ ChessBoard::ChessBoard(float size, float height)
 	: mSize(size)
 	, mHeight(height)
     , mfield_size(1)
+    , mIsWhiteTurn(true)
     , mSpeedyPawn(nullptr)
 	, mgBaseFrame(nullptr)
 	, mdBaseFrame(nullptr)
@@ -284,6 +285,10 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
     if (x==tox && z==toz)
         return true;
 
+    // check if figure has correct color
+    if (mFigures[z][x]->GetFieldColor()!=(mIsWhiteTurn?White:Black))
+        return false;
+
     // check if figure can actually move that way
     if (!mFigures[z][x]->ValidMovement(x, z, tox, toz, this))
         return false;
@@ -293,6 +298,7 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 	{
 		mFigures[toz][tox] = mFigures[z][x];
         mFigures[z][x] = nullptr;
+        mIsWhiteTurn = !mIsWhiteTurn;
 
         if(mFigures[toz][tox]->GetTypeID()==0 && abs(toz-z)==2)
             mSpeedyPawn = mFigures[toz][tox];
@@ -313,6 +319,7 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
 
 	mFigures[toz][tox] = mFigures[z][x];
     mFigures[z][x] = nullptr;
+    mIsWhiteTurn = !mIsWhiteTurn;
     mSpeedyPawn = nullptr;
     return true;
 }

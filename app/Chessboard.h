@@ -51,6 +51,7 @@ private:
 	const float mSize;
 	const float mHeight;
     float mfield_size;
+    bool mIsWhiteTurn;
     //! Bauer, der im letzten regulären Zug, zwei Felder nach vorne bewegt wurde
     Figure* mSpeedyPawn;
 
