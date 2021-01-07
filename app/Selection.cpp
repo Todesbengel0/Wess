@@ -23,7 +23,7 @@ Selection::Selection(float fieldSize, ChessBoard* chessBoard)
 }
 
 Node* Selection::Init() {
-	float y = 25.0f;
+	constexpr float y = 3000.0f;
 	mfPawn = new Pawn();
 	mfPawn->SetPosition(-2.5, y);
 	mfRook = new Rook();
@@ -69,12 +69,12 @@ void Selection::MoveUp()
         if (mSelectedFigure != nullptr)
             mSelectedFigure->MovePosition(0, -mFieldSize);
 
-        mfPawn->MovePosition(0, -mFieldSize);
-        mfRook->MovePosition(0, -mFieldSize);
-        mfKnight->MovePosition(0, -mFieldSize);
-        mfBishop->MovePosition(0, -mFieldSize);
-        mfQueen->MovePosition(0, -mFieldSize);
-        mfKing->MovePosition(0, -mFieldSize);
+        //mfPawn->MovePosition(0, -mFieldSize);
+        //mfRook->MovePosition(0, -mFieldSize);
+        //mfKnight->MovePosition(0, -mFieldSize);
+        //mfBishop->MovePosition(0, -mFieldSize);
+        //mfQueen->MovePosition(0, -mFieldSize);
+        //mfKing->MovePosition(0, -mFieldSize);
 	}
 }
 
@@ -87,12 +87,12 @@ void Selection::MoveDown()
         if (mSelectedFigure != nullptr)
             mSelectedFigure->MovePosition(0, mFieldSize);
 
-        mfPawn->MovePosition(0, mFieldSize);
-        mfRook->MovePosition(0, mFieldSize);
-        mfKnight->MovePosition(0, mFieldSize);
-        mfBishop->MovePosition(0, mFieldSize);
-        mfQueen->MovePosition(0, mFieldSize);
-        mfKing->MovePosition(0, mFieldSize);
+        //mfPawn->MovePosition(0, mFieldSize);
+        //mfRook->MovePosition(0, mFieldSize);
+        //mfKnight->MovePosition(0, mFieldSize);
+        //mfBishop->MovePosition(0, mFieldSize);
+        //mfQueen->MovePosition(0, mFieldSize);
+        //mfKing->MovePosition(0, mFieldSize);
 	}
 }
 
@@ -105,12 +105,12 @@ void Selection::MoveLeft()
         if (mSelectedFigure != nullptr)
             mSelectedFigure->MovePosition(-mFieldSize, 0);
 
-        mfPawn->MovePosition(-mFieldSize, 0);
-        mfRook->MovePosition(-mFieldSize, 0);
-        mfKnight->MovePosition(-mFieldSize, 0);
-        mfBishop->MovePosition(-mFieldSize, 0);
-        mfQueen->MovePosition(-mFieldSize, 0);
-        mfKing->MovePosition(-mFieldSize, 0);
+        //mfPawn->MovePosition(-mFieldSize, 0);
+        //mfRook->MovePosition(-mFieldSize, 0);
+        //mfKnight->MovePosition(-mFieldSize, 0);
+        //mfBishop->MovePosition(-mFieldSize, 0);
+        //mfQueen->MovePosition(-mFieldSize, 0);
+        //mfKing->MovePosition(-mFieldSize, 0);
 	}
 }
 
@@ -123,12 +123,12 @@ void Selection::MoveRight()
         if (mSelectedFigure != nullptr)
             mSelectedFigure->MovePosition(mFieldSize, 0);
 
-        mfPawn->MovePosition(mFieldSize, 0);
-        mfRook->MovePosition(mFieldSize, 0);
-        mfKnight->MovePosition(mFieldSize, 0);
-        mfBishop->MovePosition(mFieldSize, 0);
-        mfQueen->MovePosition(mFieldSize, 0);
-        mfKing->MovePosition(mFieldSize, 0);
+        //mfPawn->MovePosition(mFieldSize, 0);
+        //mfRook->MovePosition(mFieldSize, 0);
+        //mfKnight->MovePosition(mFieldSize, 0);
+        //mfBishop->MovePosition(mFieldSize, 0);
+        //mfQueen->MovePosition(mFieldSize, 0);
+        //mfKing->MovePosition(mFieldSize, 0);
 	}
 }
 
