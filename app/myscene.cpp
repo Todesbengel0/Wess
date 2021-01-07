@@ -13,7 +13,8 @@ void SceneManager::initScenes()
 {
     auto lDockWidget = new QDockWidget(QString("FPS"), SceneManager::getMainWindow());
 
-    auto cam = new Camera();
+	auto cam = new Camera();
+	cam->setNearPlane(0.01f);
 
 #ifdef _DEBUG
 	auto camController = new MouseKeyboardCameraController(cam);
