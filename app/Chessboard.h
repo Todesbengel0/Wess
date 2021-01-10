@@ -32,7 +32,7 @@ private:
 
 // getters / setters
 public:
-	const Transformation& GetRootTrafo() const;
+	Transformation& GetRootTrafo();
 	ChessField* GetField(int x, int z); 
 	Figure* GetFigure(int x, int z);
 	bool SetFigureOnField(int x, int z, int tox, int toz);

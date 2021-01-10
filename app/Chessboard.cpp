@@ -257,7 +257,7 @@ void ChessBoard::MakeFigures(Node* nFigureRoot, float field_size)
     }
 }
 
-const Transformation& ChessBoard::GetRootTrafo() const
+Transformation& ChessBoard::GetRootTrafo()
 {
 	return mtRoot;
 }

@@ -63,6 +63,7 @@ Node* Game::Init(Camera* cam)
 
 	// chessboard
 	mChessboard = new ChessBoard(10.0f, 0.5f);
+	mChessboard->GetRootTrafo().translate(0.0f, 0.20f, 0.0f);
 	mnRoot->addChild(mChessboard->Init());
 
 	// environment
