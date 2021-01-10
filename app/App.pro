@@ -9,6 +9,7 @@ include(../sgframework/Common.pri)
 TARGET = App
 SOURCES += \
     ActorHighlight.cpp \
+    BoardFrame.cpp \
     ChessBoard.cpp \
     EnvSphere.cpp \
     EnvTable.cpp \
@@ -36,6 +37,7 @@ FORMS += \
 
 HEADERS += \
     ActorHighlight.h \
+    BoardFrame.h \
     ChessBoard.h \
     EnvSphere.h \
     EnvTable.h \

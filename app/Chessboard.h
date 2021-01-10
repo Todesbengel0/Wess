@@ -2,6 +2,7 @@
 #include "ChessField.h"
 #include "Figure.h"
 #include "Graveyard.h"
+#include "BoardFrame.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -60,20 +61,13 @@ private:
 	// root of the chessboard
 	Transformation mtRoot;
 
-	// bottom base frame of the board
-	SimpleCube* mgBaseFrame;
-	Drawable* mdBaseFrame;
-	Transformation mtBaseFrame;
-
-	// side frame
+	// board frames
 	Transformation mtTopFrameCenter;
-	SimpleCube* mgSideFrame;
-	Drawable* mdSideFrame;
-	Transformation mtsSideFrame[4];
-
-	Transformation mtFieldRoot;
+	BoardFrame* mBaseFrame;
+	BoardFrame* mSideFrames[4];
 
 	// fields
+	Transformation mtFieldRoot;
 	SimpleCube* mgField;
 	ChessField mFields[8][8];
 

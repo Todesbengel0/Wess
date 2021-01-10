@@ -16,14 +16,12 @@ ChessBoard::ChessBoard(float size, float height)
     , mfield_size(1)
     , mIsWhiteTurn(true)
     , mSpeedyPawn(nullptr)
-	, mgBaseFrame(nullptr)
-	, mdBaseFrame(nullptr)
-	, mgSideFrame(nullptr)
-	, mdSideFrame(nullptr)
+	, mBaseFrame(nullptr)
 	, mgField(nullptr)
 	, mSelection(nullptr)
 {
 	memset(mFigures, 0, sizeof mFigures);
+	memset(mSideFrames, 0, sizeof mSideFrames);
 }
 
 ChessBoard::~ChessBoard()
@@ -42,13 +40,10 @@ ChessBoard::~ChessBoard()
     // fields
     delete mgField;
 
-	// side frame
-	delete mdSideFrame;
-	delete mgSideFrame;
-
-	// bottom base frame of the board
-	delete mdBaseFrame;
-	delete mgBaseFrame;
+	// board frames
+	delete mBaseFrame;
+	for (auto& frame : mSideFrames)
+		delete frame;
 
     // graveyards
     delete mBlackGraveyard;
@@ -69,18 +64,13 @@ Node* ChessBoard::Init()
 	// root of the chessboard
 	auto nRoot = new Node(&mtRoot);
 
-	// bottom base frame of the board
-	mgBaseFrame = new SimpleCube(mSize, base_frame_height * mHeight, mSize);
-	mdBaseFrame = new Drawable(mgBaseFrame);
-	QVector3D base_col(ColClamp(158), ColClamp(115), ColClamp(83));
-	mtBaseFrame.translate(0.0f, -(mHeight - base_frame_height) / 2.0f, 0.0f);	// pos relative to obj center
-	auto ntBaseFrame = new Node(&mtBaseFrame);
-	ntBaseFrame->addChild(new Node(mdBaseFrame));
+	// base frame
+	mBaseFrame = new BoardFrame();
+	mBaseFrame->GetTrafo().translate(0.0f, -(mHeight - base_frame_height) / 2.0f, 0.0f);	// pos relative to obj center
+	auto ntBaseFrame = mBaseFrame->Init(mSize, base_frame_height * mHeight, mSize);
 	nRoot->addChild(ntBaseFrame);
 
 	// surrounding side frames
-	//mtTopFrameCenter.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-	//mtTopFrameCenter.scale(1.0f, 1.0f, -1.0f);
 	mtTopFrameCenter.translate(0.0f, mHeight / 2.0f, 0.0f);	// pos relative to base frame
 	auto nTopFrameCenter = new Node(&mtTopFrameCenter);
 	MakeSideFrame(nTopFrameCenter, side_frame_thickness * mSize, field_height * mHeight);
@@ -122,22 +112,18 @@ void ChessBoard::MakeSideFrame(Node* nTopFrameCenter, float frame_thickness, flo
 	// sizes
 	const float frame_width = mSize - frame_thickness;
 
-	// geometry / drawable
-	mgSideFrame = new SimpleCube(frame_width, frame_height, frame_thickness);
-	mdSideFrame = new Drawable(mgSideFrame);
-
 	// transformations for positioning
 	// pos relative to side frame center
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < _countof(mSideFrames); ++i)
 	{
+		mSideFrames[i] = new BoardFrame;
+
 		// rotate each side frame around the center with same offset
-		mtsSideFrame[i].rotate(i * 90.0f, 0.0f, 1.0f, 0.0f);
-		mtsSideFrame[i].translate(frame_thickness / 2.0f, 0.0f, frame_width / 2.0f);
+		mSideFrames[i]->GetTrafo().rotate(i * 90.0f, 0.0f, 1.0f, 0.0f);
+		mSideFrames[i]->GetTrafo().translate(frame_thickness / 2.0f, 0.0f, frame_width / 2.0f);
 
 		// connect to center
-		auto nSideFrame = new Node(&mtsSideFrame[i]);
-		nSideFrame->addChild(new Node(mdSideFrame));
-		nTopFrameCenter->addChild(nSideFrame);
+		nTopFrameCenter->addChild(mSideFrames[i]->Init(frame_width, frame_height, frame_thickness));
 	}
 }
 
