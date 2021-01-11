@@ -7,8 +7,6 @@
 #include "Queen.h"
 #include "King.h"
 
-
-
 Selection::Selection(float fieldSize, ChessBoard* chessBoard)
     : mFieldSize(fieldSize),
       mFigureSelected(false),
@@ -20,37 +18,42 @@ Selection::Selection(float fieldSize, ChessBoard* chessBoard)
 {
 	mPositionX = 0;
 	mPositionZ = 0;
+    memset(mViewableFigures, 0, sizeof mViewableFigures);
 }
 
 Node* Selection::Init() {
 	constexpr float y = 3000.0f;
-    mfPawn = new Pawn();
-	mfPawn->SetPosition(-2.5, y);
-	mfRook = new Rook();
-	mfRook->SetPosition(-1.5, y);
-	mfKnight = new Knight();
-	mfKnight->SetPosition(-0.5f, y);
-	mfBishop = new Bishop();
-	mfBishop->SetPosition(0.5f, y);
-	mfQueen = new Queen();
-	mfQueen->SetPosition(1.5, y);
-	mfKing = new King();
-	mfKing->SetPosition(2.5, y);
+    mViewableFigures[tPawn] = new Pawn();
+    mViewableFigures[tPawn]->SetPosition(-2.5, y);
+    mViewableFigures[tRook] = new Rook();
+    mViewableFigures[tRook]->SetPosition(-1.5, y);
+    mViewableFigures[tKnight] = new Knight();
+    mViewableFigures[tKnight]->SetPosition(-0.5f, y);
+    mViewableFigures[tBishop] = new Bishop();
+    mViewableFigures[tBishop]->SetPosition(0.5f, y);
+    mViewableFigures[tQueen] = new Queen();
+    mViewableFigures[tQueen]->SetPosition(1.5, y);
+    mViewableFigures[tKing] = new King();
+    mViewableFigures[tKing]->SetPosition(2.5, y);
 
 	mCurrentField = mChessBoard->GetField(mPositionX, mPositionZ);
 	mCurrentField->SetHighlighted(true); // set shader to highlighted;
 
 	auto nTrans = new Node(&mtPosition);
-	nTrans->addChild(mfPawn->Init(White));
-	nTrans->addChild(mfRook->Init(White));
-	nTrans->addChild(mfKnight->Init(White));
-	nTrans->addChild(mfBishop->Init(White));
-	nTrans->addChild(mfQueen->Init(White));
-	nTrans->addChild(mfKing->Init(White));
+    nTrans->addChild(mViewableFigures[tPawn]->Init(White));
+    nTrans->addChild(mViewableFigures[tRook]->Init(White));
+    nTrans->addChild(mViewableFigures[tKnight]->Init(White));
+    nTrans->addChild(mViewableFigures[tBishop]->Init(White));
+    nTrans->addChild(mViewableFigures[tQueen]->Init(White));
+    nTrans->addChild(mViewableFigures[tKing]->Init(White));
 	return nTrans;
 }
 
-Selection::~Selection() = default;
+Selection::~Selection()
+{
+    for(auto figure : mViewableFigures)
+        delete figure;
+}
 
 ChessField* Selection::setField() {
 	mCurrentField->SetHighlighted(false); // set shader back to normal 
@@ -164,7 +167,7 @@ void Selection::PromotionInit()
 {
     mIsPromoting = true;
     float tempX = mSelectedFigure->GetPosition().x(), tempZ = mSelectedFigure->GetPosition().y();
-    mShownFigure = mfQueen;
+    mShownFigure = mViewableFigures[tQueen];
     mSelectedFigure->SetPosition(mShownFigure->GetPosition().x(), mShownFigure->GetPosition().y());
     mShownFigure->SetHighlighted(true);
     mShownFigure->SetPosition(tempX, tempZ);
@@ -172,44 +175,12 @@ void Selection::PromotionInit()
 
 void Selection::ShowNext()
 {
-    switch(mShownFigure->GetType())
-    {
-    case tKnight:
-        ShowFigure(mfBishop);
-        return;
-    case tBishop:
-        ShowFigure(mfRook);
-        return;
-    case tRook:
-        ShowFigure(mfQueen);
-        return;
-    case tQueen:
-        ShowFigure(mfKnight);
-        return;
-    default:
-        return;
-    }
+    ShowFigure(mViewableFigures[(mShownFigure->GetType()%4)+1]);
 }
 
 void Selection::ShowPrevious()
 {
-    switch(mShownFigure->GetType())
-    {
-    case tKnight:
-        ShowFigure(mfQueen);
-        return;
-    case tBishop:
-        ShowFigure(mfKnight);
-        return;
-    case tRook:
-        ShowFigure(mfBishop);
-        return;
-    case tQueen:
-        ShowFigure(mfRook);
-        return;
-    default:
-        return;
-    }
+    ShowFigure(mViewableFigures[(mShownFigure->GetType()+2)%4+1]);
 }
 
 void Selection::ShowFigure(Figure *shownFigure)
@@ -239,10 +210,6 @@ void Selection::PromotionFinit()
     mShownFigure = nullptr;
     mIsPromoting = false;
 }
-
-
-
-
 
 void Selection::keyboard(int, int)
 {

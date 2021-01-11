@@ -2,14 +2,14 @@
 #include "Rook.h"
 #include "Chessboard.h"
 
-Rook::Rook() : Figure(){}
+Rook::Rook() = default;
+
+Rook::~Rook() = default;
 
 FigureType Rook::GetType() const
 {
     return tRook;
 }
-
-Rook::~Rook() = default;
 
 bool Rook::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board)
 {

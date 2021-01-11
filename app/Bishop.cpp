@@ -2,14 +2,14 @@
 #include "Bishop.h"
 #include "Chessboard.h"
 
-Bishop::Bishop() : Figure(){}
+Bishop::Bishop() = default;
+
+Bishop::~Bishop() = default;
 
 FigureType Bishop::GetType() const
 {
     return tBishop;
 }
-
-Bishop::~Bishop() = default;
 
 bool Bishop::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board)
 {

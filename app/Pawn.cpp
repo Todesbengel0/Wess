@@ -2,14 +2,14 @@
 #include "Pawn.h"
 #include "Chessboard.h"
 
-Pawn::Pawn() : Figure(){}
+Pawn::Pawn() = default;
+
+Pawn::~Pawn() = default;
 
 FigureType Pawn::GetType() const
 {
     return tPawn;
 }
-
-Pawn::~Pawn() = default;
 
 bool Pawn::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board)
 {

@@ -2,14 +2,14 @@
 #include "Queen.h"
 #include "Chessboard.h"
 
-Queen::Queen() : Figure(){}
+Queen::Queen() = default;
+
+Queen::~Queen() = default;
 
 FigureType Queen::GetType() const
 {
     return tQueen;
 }
-
-Queen::~Queen() = default;
 
 bool Queen::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board)
 {

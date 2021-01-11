@@ -11,23 +11,26 @@ public:
 	~Selection();
 	Node* Init();
 
+	void keyboard(int, int) override;
+	
+	ChessField* setField();
+
+//Figure and Field Selection
+private:
     void MoveUp();
     void MoveDown();
     void MoveLeft();
     void MoveRight();
     void SelectFigure();
 
-    //Promotion
+//Promotion
+private:
     void PromotionInit();
     void ShowNext();
     void ShowPrevious();
     void ShowFigure(Figure* shownFigure);
     void PromotionReset();
     void PromotionFinit();
-
-	void keyboard(int, int) override;
-	
-	ChessField* setField();
 
 private:
 	float mFieldSize;
@@ -44,12 +47,7 @@ private:
 	ChessField* mCurrentField;
 	
 	Figure* mSelectedFigure;
-	Figure* mfPawn;
-	Figure* mfRook;
-	Figure* mfKnight;
-	Figure* mfBishop;
-	Figure* mfQueen;
-	Figure* mfKing;
+    Figure* mViewableFigures[6];
 
     //Promotion
     Figure* mShownFigure;

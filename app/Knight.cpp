@@ -2,14 +2,14 @@
 #include "Knight.h"
 #include "Chessboard.h"
 
-Knight::Knight() : Figure(){}
+Knight::Knight() = default;
+
+Knight::~Knight() = default;
 
 FigureType Knight::GetType() const
 {
     return tKnight;
 }
-
-Knight::~Knight() = default;
 
 bool Knight::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board)
 {
