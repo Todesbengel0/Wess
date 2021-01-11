@@ -2,7 +2,12 @@
 #include "King.h"
 #include "Chessboard.h"
 
-King::King() : Figure(tKing){}
+King::King() : Figure(){}
+
+FigureType King::GetType() const
+{
+    return tKing;
+}
 
 King::~King() = default;
 

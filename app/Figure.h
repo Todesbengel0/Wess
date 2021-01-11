@@ -10,8 +10,7 @@ class Figure : public ChessFieldActor, public WoodenPiece
 {
 // ctor / dtor
 public: 
-	Figure();
-    Figure(FigureType type);
+    Figure();
 	~Figure();
 
 // initialization
@@ -28,7 +27,7 @@ private:
 public:
     void SetPosition(float tx, float tz);
     QVector2D GetPosition();
-    FigureType GetType() const;
+    virtual FigureType GetType() const = 0;
 protected:
 	Transformation& GetRotationTrafo();
 	int GetInitialX() const;
@@ -47,7 +46,6 @@ private:
 	int mInitialX;
 	int mInitialZ;
     QVector2D mPosition;
-    FigureType mType;
 
 // scene objects
 private:

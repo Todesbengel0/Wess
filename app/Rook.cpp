@@ -2,7 +2,12 @@
 #include "Rook.h"
 #include "Chessboard.h"
 
-Rook::Rook() : Figure(tRook){}
+Rook::Rook() : Figure(){}
+
+FigureType Rook::GetType() const
+{
+    return tRook;
+}
 
 Rook::~Rook() = default;
 

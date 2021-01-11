@@ -2,7 +2,12 @@
 #include "Bishop.h"
 #include "Chessboard.h"
 
-Bishop::Bishop() : Figure(tBishop){}
+Bishop::Bishop() : Figure(){}
+
+FigureType Bishop::GetType() const
+{
+    return tBishop;
+}
 
 Bishop::~Bishop() = default;
 

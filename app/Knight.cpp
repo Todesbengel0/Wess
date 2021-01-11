@@ -2,7 +2,12 @@
 #include "Knight.h"
 #include "Chessboard.h"
 
-Knight::Knight() : Figure(tKnight){}
+Knight::Knight() : Figure(){}
+
+FigureType Knight::GetType() const
+{
+    return tKnight;
+}
 
 Knight::~Knight() = default;
 

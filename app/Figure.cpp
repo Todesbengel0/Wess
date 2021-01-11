@@ -5,16 +5,6 @@ Figure::Figure()
     : mInitialX(-1)
 	, mInitialZ(-1)
     , mPosition(QVector2D(-1, -1))
-    , mType(tPawn)
-    , mgMesh(nullptr)
-{
-}
-
-Figure::Figure(FigureType type)
-    : mInitialX(-1)
-    , mInitialZ(-1)
-    , mPosition(QVector2D(-1, -1))
-    , mType(type)
     , mgMesh(nullptr)
 {
 }
@@ -81,11 +71,6 @@ void Figure::SetPosition(float tx, float tz)
 QVector2D Figure::GetPosition()
 {
     return mPosition;
-}
-
-FigureType Figure::GetType() const
-{
-    return mType;
 }
 
 Transformation& Figure::GetRotationTrafo()

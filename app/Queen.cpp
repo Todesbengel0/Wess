@@ -2,7 +2,12 @@
 #include "Queen.h"
 #include "Chessboard.h"
 
-Queen::Queen() : Figure(tQueen){}
+Queen::Queen() : Figure(){}
+
+FigureType Queen::GetType() const
+{
+    return tQueen;
+}
 
 Queen::~Queen() = default;
 
