@@ -5,16 +5,16 @@ Figure::Figure()
     : mInitialX(-1)
 	, mInitialZ(-1)
     , mPosition(QVector2D(-1, -1))
-    , mTypeID(-1)
+    , mType(tPawn)
     , mgMesh(nullptr)
 {
 }
 
-Figure::Figure(int typeID)
+Figure::Figure(FigureType type)
     : mInitialX(-1)
     , mInitialZ(-1)
     , mPosition(QVector2D(-1, -1))
-    , mTypeID(typeID)
+    , mType(type)
     , mgMesh(nullptr)
 {
 }
@@ -83,9 +83,9 @@ QVector2D Figure::GetPosition()
     return mPosition;
 }
 
-int Figure::GetTypeID() const
+FigureType Figure::GetType() const
 {
-    return mTypeID;
+    return mType;
 }
 
 Transformation& Figure::GetRotationTrafo()

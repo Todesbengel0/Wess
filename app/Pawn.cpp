@@ -2,7 +2,7 @@
 #include "Pawn.h"
 #include "Chessboard.h"
 
-Pawn::Pawn() : Figure(0){}
+Pawn::Pawn() : Figure(tPawn){}
 
 Pawn::~Pawn() = default;
 

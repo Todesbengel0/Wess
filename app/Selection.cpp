@@ -24,7 +24,7 @@ Selection::Selection(float fieldSize, ChessBoard* chessBoard)
 
 Node* Selection::Init() {
 	constexpr float y = 3000.0f;
-	mfPawn = new Pawn();
+    mfPawn = new Pawn();
 	mfPawn->SetPosition(-2.5, y);
 	mfRook = new Rook();
 	mfRook->SetPosition(-1.5, y);
@@ -137,7 +137,7 @@ void Selection::SelectFigure()
     if (mSelectedFigure != nullptr)
     { // set chesspiece to new position and deselect it
         if (mChessBoard->SetFigureOnField(mSelectionX, mSelectionZ, mPositionX, mPositionZ)) {
-            if ((mPositionZ != 0 && mPositionZ != 7) || mSelectedFigure->GetTypeID()!=0)
+            if ((mPositionZ != 0 && mPositionZ != 7) || mSelectedFigure->GetType()!=0)
             {
                 // unselect chesspiece
                 mSelectedFigure->SetHighlighted(false);
@@ -172,18 +172,18 @@ void Selection::PromotionInit()
 
 void Selection::ShowNext()
 {
-    switch(mShownFigure->GetTypeID())
+    switch(mShownFigure->GetType())
     {
-    case 1:
+    case tKnight:
         ShowFigure(mfBishop);
         return;
-    case 2:
+    case tBishop:
         ShowFigure(mfRook);
         return;
-    case 3:
+    case tRook:
         ShowFigure(mfQueen);
         return;
-    case 4:
+    case tQueen:
         ShowFigure(mfKnight);
         return;
     default:
@@ -193,18 +193,18 @@ void Selection::ShowNext()
 
 void Selection::ShowPrevious()
 {
-    switch(mShownFigure->GetTypeID())
+    switch(mShownFigure->GetType())
     {
-    case 1:
+    case tKnight:
         ShowFigure(mfQueen);
         return;
-    case 2:
+    case tBishop:
         ShowFigure(mfKnight);
         return;
-    case 3:
+    case tRook:
         ShowFigure(mfBishop);
         return;
-    case 4:
+    case tQueen:
         ShowFigure(mfRook);
         return;
     default:
@@ -235,7 +235,7 @@ void Selection::PromotionFinit()
     this->PromotionReset();
     mSelectedFigure->SetHighlighted(false);
     mSelectedFigure = nullptr;
-    mChessBoard->Promote(mPositionX, mPositionZ, mShownFigure->GetTypeID());
+    mChessBoard->Promote(mPositionX, mPositionZ, mShownFigure->GetType());
     mShownFigure = nullptr;
     mIsPromoting = false;
 }

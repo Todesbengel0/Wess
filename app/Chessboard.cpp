@@ -158,8 +158,8 @@ void ChessBoard::MakeFigures(Node* nFigureRoot, float field_size)
 	// pawns
 	for (int x = 0; x < 8; ++x)
 	{
-		MakeFigure<Pawn>(x, 1, nFigureRoot, ChessColor::White, field_size);
-		MakeFigure<Pawn>(x, 6, nFigureRoot, ChessColor::Black, field_size);
+        MakeFigure<Pawn>(x, 1, nFigureRoot, ChessColor::White, field_size);
+        MakeFigure<Pawn>(x, 6, nFigureRoot, ChessColor::Black, field_size);
 	}
 
 	// rooks
@@ -197,49 +197,49 @@ void ChessBoard::MakeFigures(Node* nFigureRoot, float field_size)
         node = figure->Init(ChessColor::White, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[0][3][i] = figure;
+        mPromotionFigures[White][tQueen-1][i] = figure;
 
         figure = new Queen;
         node = figure->Init(ChessColor::Black, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[1][3][i] = figure;
+        mPromotionFigures[Black][tQueen-1][i] = figure;
 
         figure = new Rook;
         node = figure->Init(ChessColor::White, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[0][2][i] = figure;
+        mPromotionFigures[White][tRook-1][i] = figure;
 
         figure = new Rook;
         node = figure->Init(ChessColor::Black, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[1][2][i] = figure;
+        mPromotionFigures[Black][tRook-1][i] = figure;
 
         figure = new Bishop;
         node = figure->Init(ChessColor::White, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[0][1][i] = figure;
+        mPromotionFigures[White][tBishop-1][i] = figure;
 
         figure = new Bishop;
         node = figure->Init(ChessColor::Black, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[1][1][i] = figure;
+        mPromotionFigures[Black][tBishop-1][i] = figure;
 
         figure = new Knight;
         node = figure->Init(ChessColor::White, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[0][0][i] = figure;
+        mPromotionFigures[White][tKnight-1][i] = figure;
 
         figure = new Knight;
         node = figure->Init(ChessColor::Black, 4, 4);
         figure->SetPosition(-500, -500);	// Z inverted on RHS
         nFigureRoot->addChild(node);
-        mPromotionFigures[1][0][i] = figure;
+        mPromotionFigures[Black][tKnight-1][i] = figure;
     }
 }
 
@@ -286,7 +286,7 @@ bool ChessBoard::SetFigureOnField(int x, int z, int tox, int toz)
         mFigures[z][x] = nullptr;
         mIsWhiteTurn = !mIsWhiteTurn;
 
-        if(mFigures[toz][tox]->GetTypeID()==0 && abs(toz-z)==2)
+        if(mFigures[toz][tox]->GetType()==tPawn && abs(toz-z)==2)
             mSpeedyPawn = mFigures[toz][tox];
         else
             mSpeedyPawn = nullptr;
@@ -335,15 +335,15 @@ void ChessBoard::Promote(int x, int z, int type)
     if(!mFigures[z][x])
         return;
     auto color = mFigures[z][x]->GetFieldColor();
-    if(mFigures[z][x]->GetTypeID()!=0 || z!=((color==White)?7:0))
+    if(mFigures[z][x]->GetType()!=tPawn || z!=((color==White)?7:0))
         return;
     Figure* pawn = mFigures[z][x];
     Figure* promotedFigure = nullptr;
     for (int i = 0; i < 8; ++i)
-        if ((promotedFigure = mPromotionFigures[(color==White)?0:1][type-1][i])->GetTypeID()!=0)
+        if ((promotedFigure = mPromotionFigures[color][type-1][i])->GetType()!=tPawn)
         {
             mFigures[z][x] = promotedFigure;
-            mPromotionFigures[(color==White)?0:1][type-1][i] = pawn;
+            mPromotionFigures[color][type-1][i] = pawn;
             break;
         }
     pawn->SetPosition(-500, -500);

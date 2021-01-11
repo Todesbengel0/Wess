@@ -2,7 +2,7 @@
 #include "Queen.h"
 #include "Chessboard.h"
 
-Queen::Queen() : Figure(4){}
+Queen::Queen() : Figure(tQueen){}
 
 Queen::~Queen() = default;
 

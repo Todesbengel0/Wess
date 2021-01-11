@@ -32,7 +32,7 @@ Node* Graveyard::Init()
 
 void Graveyard::AddFigure(Figure* deadFigure)
 {
-    short figureValue = deadFigure->GetTypeID();
+    short figureValue = deadFigure->GetType();
     for (int j = 0; j < 6; ++j)
     {
         if (!mFigures[j][0])
@@ -41,7 +41,7 @@ void Graveyard::AddFigure(Figure* deadFigure)
             MoveFigure(deadFigure, j, 0);
             return;
         }
-        short graveyardFValue = mFigures[j][0]->GetTypeID();
+        short graveyardFValue = mFigures[j][0]->GetType();
         if (graveyardFValue < figureValue)
             continue;
         if (graveyardFValue == figureValue)

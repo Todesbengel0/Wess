@@ -2,7 +2,7 @@
 #include "Rook.h"
 #include "Chessboard.h"
 
-Rook::Rook() : Figure(3){}
+Rook::Rook() : Figure(tRook){}
 
 Rook::~Rook() = default;
 

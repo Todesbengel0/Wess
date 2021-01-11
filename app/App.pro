@@ -41,6 +41,7 @@ HEADERS += \
     ChessBoard.h \
     EnvSphere.h \
     EnvTable.h \
+    FigureType.h \
     Game.h \
     Bishop.h \
     ChessColor.h \

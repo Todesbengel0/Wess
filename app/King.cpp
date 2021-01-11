@@ -2,7 +2,7 @@
 #include "King.h"
 #include "Chessboard.h"
 
-King::King() : Figure(5){}
+King::King() : Figure(tKing){}
 
 King::~King() = default;
 
@@ -18,7 +18,7 @@ bool King::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosi
             if (board->GetFigure(5, zStartPosition) || board->GetFigure(6, zStartPosition) || !board->GetFigure(7, zStartPosition))
                 return false;
             Figure* figure = board->GetFigure(7, zStartPosition);
-            if (figure->GetTypeID()!=3 || (figure->GetFieldColor()==White)!=isWhite)
+            if (figure->GetType()!=tRook || (figure->GetFieldColor()==White)!=isWhite)
                 return false;
             board->SetFigureOnFieldNoLogic(7, zStartPosition, 5, zStartPosition);
             figure->MovePosition(-board->GetFieldSize()*2, 0);
@@ -29,7 +29,7 @@ bool King::ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosi
             if (board->GetFigure(3, zStartPosition) || board->GetFigure(2, zStartPosition) || board->GetFigure(1, zStartPosition) || !board->GetFigure(0, zStartPosition))
                 return false;
             Figure* figure = board->GetFigure(0, zStartPosition);
-            if (figure->GetTypeID()!=3 || (figure->GetFieldColor()==White)!=isWhite)
+            if (figure->GetType()!=tRook || (figure->GetFieldColor()==White)!=isWhite)
                 return false;
             board->SetFigureOnFieldNoLogic(0, zStartPosition, 3, zStartPosition);
             figure->MovePosition(board->GetFieldSize()*3, 0);

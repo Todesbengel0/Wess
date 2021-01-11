@@ -2,6 +2,7 @@
 
 #include "ChessFieldActor.h"
 #include "WoodenPiece.h"
+#include "FigureType.h"
 
 class ChessBoard;
 
@@ -10,7 +11,7 @@ class Figure : public ChessFieldActor, public WoodenPiece
 // ctor / dtor
 public: 
 	Figure();
-    Figure(int typeID);
+    Figure(FigureType type);
 	~Figure();
 
 // initialization
@@ -27,7 +28,7 @@ private:
 public:
     void SetPosition(float tx, float tz);
     QVector2D GetPosition();
-    int GetTypeID() const;
+    FigureType GetType() const;
 protected:
 	Transformation& GetRotationTrafo();
 	int GetInitialX() const;
@@ -46,7 +47,7 @@ private:
 	int mInitialX;
 	int mInitialZ;
     QVector2D mPosition;
-    int mTypeID;
+    FigureType mType;
 
 // scene objects
 private:

@@ -2,7 +2,7 @@
 #include "Knight.h"
 #include "Chessboard.h"
 
-Knight::Knight() : Figure(1){}
+Knight::Knight() : Figure(tKnight){}
 
 Knight::~Knight() = default;
 

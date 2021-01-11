@@ -5,8 +5,8 @@
 class Pawn : public Figure
 {
 public:
-	Pawn();
-	~Pawn();
+    Pawn();
+    ~Pawn();
 
     bool ValidMovement(int xStartPosition, int zStartPosition, int xTargetPosition, int zTargetPosition, ChessBoard* board) override;
 

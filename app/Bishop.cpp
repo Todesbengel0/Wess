@@ -2,7 +2,7 @@
 #include "Bishop.h"
 #include "Chessboard.h"
 
-Bishop::Bishop() : Figure(2){}
+Bishop::Bishop() : Figure(tBishop){}
 
 Bishop::~Bishop() = default;
 
