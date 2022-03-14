@@ -1,2 +1,2 @@
 # Wess
-Computergrafik Projektarbeit im SGFramework
+Computergrafics Project using SGFramework
